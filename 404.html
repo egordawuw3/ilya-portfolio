@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Страница не найдена | KLAGE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;600;800&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* =========================================
+       ШРИФТЫ И БАЗОВЫЕ НАСТРОЙКИ
+       ========================================= */
+    @font-face { font-family: 'Involve'; src: url('assets/fonts/Involve.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+    
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+    
+    ::selection { background: #ffb800 !important; color: #000 !important; -webkit-text-fill-color: #000 !important; }
+    ::-moz-selection { background: #ffb800 !important; color: #000 !important; -webkit-text-fill-color: #000 !important; }
+    
+    :root {
+      --y: #ffb800;
+      --yg: rgba(255, 184, 0, 0.4);
+      --tx: #e8e6de;
+      --mu: rgba(232, 230, 222, 0.5);
+    }
+    
+    body {
+      background: #030100;
+      color: var(--tx);
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* =========================================
+       АНИМИРОВАННЫЙ ФОН
+       ========================================= */
+    #bg { position: fixed; inset: 0; z-index: 0; background: #020100; overflow: hidden; }
+    .bg-sphere { position: absolute; border-radius: 50%; filter: blur(150px); pointer-events: none; will-change: transform, opacity; }
+    .sphere-1 { width: 70vw; height: 70vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.3) 0%, rgba(255, 160, 0, 0) 70%); top: -20vw; left: -20vw; animation: pulse1 6s infinite alternate ease-in-out; }
+    .sphere-2 { width: 65vw; height: 65vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.25) 0%, rgba(255, 160, 0, 0) 70%); bottom: -20vw; right: -20vw; animation: pulse2 7s infinite alternate ease-in-out; }
+    @keyframes pulse1 { 0% { transform: scale(1) translate(0, 0); opacity: 0.5; } 100% { transform: scale(1.1) translate(6vw, 6vw); opacity: 1; } }
+    @keyframes pulse2 { 0% { transform: scale(1) translate(0, 0); opacity: 1; } 100% { transform: scale(1.15) translate(-6vw, -6vw); opacity: 0.6; } }
+
+    /* =========================================
+       КОНТЕЙНЕРЫ
+       ========================================= */
+    #wrap {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .nlogo {
+      position: absolute;
+      top: 34px;
+      left: 50%;
+      transform: translateX(-50%);
+      line-height: 1;
+      font-family: 'Involve', sans-serif;
+      font-weight: 700;
+      font-size: 8.5px; 
+      letter-spacing: 1.3em;
+      margin-right: -1.3em; 
+      text-decoration: none;
+      background: linear-gradient(to bottom, #ffffff 0%, #777777 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .nlogo:hover { opacity: 1; }
+
+    /* =========================================
+       СВЕЧЕНИЕ 404
+       ========================================= */
+    .gw-container {
+      width: 100%;
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .gw-blur, .gw-sharp, .gw-text {
+      grid-area: 1 / 1;
+      font-family: 'Involve', sans-serif; 
+      font-size: clamp(100px, 16vw, 220px); 
+      font-weight: 700; 
+      letter-spacing: -0.02em; 
+      line-height: 1;
+    }
+
+    .gw-blur {
+      color: #fff;
+      filter: blur(6px); 
+      user-select: none;
+      pointer-events: none;
+      text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.4), 
+        0 0 25px rgba(255, 200, 0, 0.9),     
+        0 0 60px rgba(255, 160, 0, 0.8),   
+        0 0 220px rgba(255, 110, 0, 0.5), 
+        0 0 300px rgba(255, 60, 0, 0.3);  
+      animation: gp 3s ease-in-out infinite alternate; 
+    }
+
+    .gw-sharp {
+      color: #fff;
+      user-select: none;
+      pointer-events: none;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.6); 
+      /* Уменьшил ширину блюра по краям */
+      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%);
+    }
+
+    .gw-text { color: transparent; user-select: text; z-index: 5; }
+
+    @keyframes gp {
+      0%, 100% { 
+        text-shadow: 
+          0 0 10px rgba(255, 255, 255, 0.4),
+          0 0 25px rgba(255, 200, 0, 0.9),
+          0 0 60px rgba(255, 160, 0, 0.8),
+          0 0 220px rgba(255, 110, 0, 0.5),
+          0 0 300px rgba(255, 60, 0, 0.3);
+      }
+      50% { 
+        text-shadow: 
+          0 0 6px rgba(255, 255, 255, 0.2),
+          0 0 15px rgba(255, 200, 0, 0.7),
+          0 0 40px rgba(255, 160, 0, 0.5),
+          0 0 160px rgba(255, 110, 0, 0.35),
+          0 0 220px rgba(255, 60, 0, 0.15);
+      }
+    }
+
+    /* =========================================
+       ТЕКСТ И КНОПКА
+       ========================================= */
+    .title {
+      font-family: 'Involve', sans-serif;
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    
+    .subtitle {
+      font-size: clamp(14px, 1.5vw, 16px);
+      color: var(--mu);
+      max-width: 440px;
+      line-height: 1.7;
+      margin-bottom: 35px;
+      font-weight: 400;
+    }
+
+    .bpri {
+      background: var(--y);
+      color: #000;
+      font-weight: 700;
+      font-size: 13.5px;
+      padding: 13px 26px;
+      border-radius: 100px;
+      text-decoration: none;
+      letter-spacing: .05em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px; 
+      transition: transform .22s, box-shadow .22s;
+    }
+    .bpri:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px var(--yg), 0 0 60px rgba(255, 184, 0, .15)
+    }
+    
+    .btn-arrow {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: -4px; 
+    }
+
+    /* =========================================
+       FOOTER (ПОДВАЛ)
+       ========================================= */
+    footer {
+      position: relative;
+      z-index: 10;
+      padding: 20px 0 40px;
+      text-align: center;
+    }
+    .fcopy {
+      color: rgba(255, 255, 255, .2);
+      font-size: 11px;
+      letter-spacing: .1em;
+      font-weight: 500;
+    }
+
+    /* АДАПТИВНОСТЬ */
+    @media(max-width:600px) {
+      .gw-blur, .gw-sharp, .gw-text { font-size: clamp(100px, 28vw, 150px); }
+      .bpri { width: 100%; max-width: 300px; justify-content: center; padding: 16px 20px; }
+      #wrap { padding: 40px 24px; }
+      footer { padding: 20px 0 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Фон со сферами -->
+  <div id="bg">
+    <div class="bg-sphere sphere-1"></div>
+    <div class="bg-sphere sphere-2"></div>
+  </div>
+  
+  <!-- Монохромный шум поверх -->
+  <canvas id="noise" width="0" height="0" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.04;filter:grayscale(100%);"></canvas>
+
+  <div id="wrap">
+    <!-- Логотип сверху -->
+    <a href="/" class="nlogo">KLAGE</a>
+    
+    <!-- Отцентрованная светящаяся надпись 404 -->
+    <div class="gw-container">
+      <span class="gw-blur" aria-hidden="true">404</span>
+      <span class="gw-sharp" aria-hidden="true">404</span>
+      <span class="gw-text">404</span>
+    </div>
+
+    <h1 class="title">Страница не найдена</h1>
+    <p class="subtitle">Похоже, эта страница пропала в монтажном потоке.<br>Вернитесь на главную, там всё есть.</p>
+
+    <!-- Желтая кнопка со стрелкой из отзывов -->
+    <a href="/" class="bpri">
+      <span class="btn-arrow">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 19l-7-7 7-7"/>
+        </svg>
+      </span>
+      <span>Вернуться на главную</span>
+    </a>
+  </div>
+  <script>
+    // Скрипт шума
+    (function () {
+      const cv = document.getElementById('noise');
+      const ctx = cv.getContext('2d');
+      const nw = 128, nh = 128;
+      const oc = document.createElement('canvas');
+      oc.width = nw; oc.height = nh;
+      const octx = oc.getContext('2d');
+      let w, h;
+      function resize() {
+        w = cv.width = window.innerWidth;
+        h = cv.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+      function tick() {
+        const id = octx.createImageData(nw, nh);
+        const d = id.data;
+        for (let i = 0; i < d.length; i += 4) {
+          const val = Math.random() > 0.5 ? 255 : 0; 
+          d[i] = val;     // R
+          d[i+1] = val;   // G
+          d[i+2] = val;   // B
+          d[i+3] = 255;   // Alpha
+        }
+        octx.putImageData(id, 0, 0);
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = ctx.createPattern(oc, 'repeat');
+        ctx.fillRect(0, 0, w, h);
+        setTimeout(tick, 50); 
+      }
+      tick();
+    })();
+  </script>
+</body>
+</html>

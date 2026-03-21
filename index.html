@@ -35,7 +35,6 @@ body { background: #030100; color: var(--tx); font-family: 'Inter', sans-serif; 
 @keyframes pulse2 { 0% { transform: scale(1) translate(0, 0); opacity: 1; } 100% { transform: scale(1.15) translate(-6vw, -6vw); opacity: 0.6; } }
 
 /* HERO & NAV */
-/* ВАЖНОЕ ИСПРАВЛЕНИЕ: Убрали z-index: 2 у обертки, чтобы выпустить кнопки наверх */
 #hero-wrap { position: relative; overflow: hidden; width: 100%; } 
 @keyframes navDrop { from { opacity: 0; transform: translate(-50%, -20px); } to { opacity: 1; transform: translate(-50%, 0); } }
 nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); z-index: 600; width: 100%; max-width: 1000px; height: 64px; padding: 0 16px 0 34px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; transition: all .6s cubic-bezier(0.22, 1, 0.36, 1); white-space: nowrap; opacity: 0; animation: navDrop 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
@@ -54,7 +53,7 @@ nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; }
 
 #hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 100px 24px; position: relative; width: 100%; }
 
-/* Текст "СИЯТЬ" оставляем под шумом (z-index 2) */
+/* Текст "СИЯТЬ" под шумом (z-index 2) */
 .htitle { display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; transform: translateY(30px); animation: fi .9s .3s forwards; position: relative; z-index: 2; }
 .hsup { font-family: 'Involve', sans-serif; font-size: clamp(8.5px, 2.2vw, 9.5px); font-weight: 700; letter-spacing: 0.25em; padding-left: 0.25em; text-transform: uppercase; color: #ffaa00; text-shadow: 0 0 12px rgba(255, 170, 0, 0.4); margin-bottom: -4px; text-align: center; }
 .hhand { font-family: 'Manrope', sans-serif; font-size: clamp(20px, 3.5vw, 36px); font-weight: 300; letter-spacing: 0.03em; text-transform: none; color: #fff; margin: 0; position: relative; z-index: 2; line-height: 1; }
@@ -176,7 +175,7 @@ section { position: relative; z-index: 10; }
 .chip:hover { border-color: var(--y); color: var(--y) }
 .ab-btns { display: flex; gap: 10px; align-items: center; }
 
-/* === ВИДЕО-КРУЖОЧКИ (С КНОПКОЙ PLAY И ЗВУКОМ) === */
+/* === ВИДЕО-КРУЖОЧКИ === */
 .rvid, .rvoice, .rtxts { padding: 40px 0; }
 .rvid { padding-top: 15px; }
 .rgst { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: rgba(255, 255, 255, 0.3); font-weight: 700; margin-bottom: 28px; }
@@ -193,17 +192,14 @@ section { position: relative; z-index: 10; }
 .vc-in { width: 100%; height: 100%; border-radius: 50%; background: #1a1a1a; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); transition: border-color 0.3s; }
 .vidcirc.active:hover .vc-in { border-color: rgba(255, 255, 255, 0.3); }
 
-/* Курсор и кликабельность только для активного кружка */
 .vidcirc.active .vc-in { cursor: pointer; }
 
-/* Видео внутри кружка */
 .vc-in video {
     width: 100%; height: 100%; object-fit: cover;
     transform: scale(1.02); pointer-events: none;
     border: none; outline: none; border-radius: 50%;
 }
 
-/* Ховер эффекты для кнопки Play ТОЛЬКО в активном кружке */
 .vidcirc.active .vc-in:hover .w-play-btn { background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.4); transform: translate(-50%, -50%) scale(1.08); }
 .vidcirc.active .vc-in:hover .w-play-btn.is-playing { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
@@ -211,6 +207,7 @@ section { position: relative; z-index: 10; }
 .vidcirc.active .vc-name { opacity: 0.8; }
 .vidcirc.active:hover .vc-name { opacity: 1; }
 
+/* === РАБОЧИЕ ГОЛОСОВЫЕ ОТЗЫВЫ === */
 .rvoice { padding-top: 0; }
 .vocgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 .voc-wrapper { display: flex; flex-direction: column; gap: 10px; }
@@ -219,8 +216,13 @@ section { position: relative; z-index: 10; }
 .vocplay { width: 44px; height: 44px; border-radius: 50%; background: var(--y); border: none; display: flex; align-items: center; justify-content: center; color: #000; flex-shrink: 0; transition: transform .2s, box-shadow .2s; }
 .voccard:hover .vocplay { transform: scale(1.05); box-shadow: 0 0 15px var(--yg); }
 .vocplay svg { width: 24px; height: 24px; fill: currentColor; margin-left: -1px; }
-.vocwave { flex: 1; height: 24px; background: repeating-linear-gradient(90deg, var(--mu) 0px, var(--mu) 2px, transparent 2px, transparent 5px); opacity: 0.5; border-radius: 2px; }
-.voc-dur { font-size: 11px; color: var(--mu); font-family: monospace; }
+
+/* Звуковая волна (прогресс) */
+.vocwave-box { flex: 1; height: 24px; position: relative; border-radius: 2px; display: flex; align-items: center; cursor: pointer; }
+.vocwave-bg { width: 100%; height: 100%; background: repeating-linear-gradient(90deg, rgba(255,255,255,0.15) 0px, rgba(255,255,255,0.15) 2px, transparent 2px, transparent 5px); position: absolute; left: 0; top: 0; border-radius: 2px; }
+.vocwave-fill { height: 100%; width: 0%; background: repeating-linear-gradient(90deg, var(--y) 0px, var(--y) 2px, transparent 2px, transparent 5px); position: absolute; left: 0; top: 0; pointer-events: none; transition: width 0.1s linear; border-radius: 2px; }
+
+.voc-dur { font-size: 11px; color: var(--mu); font-family: monospace; width: 30px; text-align: right; }
 .voc-name { font-size: 13px; font-weight: 500; color: var(--tx); padding-left: 20px; opacity: 0.8; }
 
 .txrgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px }
@@ -437,6 +439,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 
 <div class="vid-track" id="vidTrack">
 
+<!-- ВИДЕО-КРУЖОЧКИ С КНОПКОЙ PLAY И ЗВУКОМ -->
 <div class="vidcirc" data-index="0">
   <div class="vc-ring">
     <div class="vc-in" onclick="toggleCircleVideo(this)">
@@ -477,16 +480,6 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
   <div class="vc-name">Клиент 4</div>
 </div>
 
-<div class="vidcirc" data-index="4">
-  <div class="vc-ring">
-    <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/videos/rev5.mp4" loop playsinline preload="metadata"></video>
-      <div class="w-play-btn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
-    </div>
-  </div>
-  <div class="vc-name">Клиент 5</div>
-</div>
-
 </div>
 
 <button class="slider-btn" id="nextBtn">
@@ -498,9 +491,63 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="rvoice ru-only">
 <div class="rgst">Голосовые отзывы</div>
 <div class="vocgrid">
-<div class="voc-wrapper"><div class="voccard"><div class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div><div class="vocwave"></div><div class="voc-dur">0:15</div></div><div class="voc-name">Андрей</div></div>
-<div class="voc-wrapper"><div class="voccard"><div class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div><div class="vocwave"></div><div class="voc-dur">0:24</div></div><div class="voc-name">Максим</div></div>
-<div class="voc-wrapper"><div class="voccard"><div class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div><div class="vocwave"></div><div class="voc-dur">1:02</div></div><div class="voc-name">Екатерина</div></div>
+
+<!-- ГОЛОСОВОЙ ОТЗЫВ 1 -->
+<div class="voc-wrapper">
+  <div class="voccard" onclick="toggleVoice(this, event)">
+    <audio src="assets/audio/voice1.mp3" preload="metadata" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
+    <button class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
+    <div class="vocwave-box" onclick="seekVoice(event, this)">
+      <div class="vocwave-bg"></div>
+      <div class="vocwave-fill"></div>
+    </div>
+    <div class="voc-dur">0:00</div>
+  </div>
+  <div class="voc-name">Александр</div>
+</div>
+
+<!-- ГОЛОСОВОЙ ОТЗЫВ 2 -->
+<div class="voc-wrapper">
+  <div class="voccard" onclick="toggleVoice(this, event)">
+    <audio src="assets/audio/voice2.mp3" preload="metadata" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
+    <button class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
+    <div class="vocwave-box" onclick="seekVoice(event, this)">
+      <div class="vocwave-bg"></div>
+      <div class="vocwave-fill"></div>
+    </div>
+    <div class="voc-dur">0:00</div>
+  </div>
+  <div class="voc-name">Максим</div>
+</div>
+
+<!-- ГОЛОСОВОЙ ОТЗЫВ 3 -->
+<div class="voc-wrapper">
+  <div class="voccard" onclick="toggleVoice(this, event)">
+    <audio src="assets/audio/voice3.mp3" preload="metadata" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
+    <button class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
+    <div class="vocwave-box" onclick="seekVoice(event, this)">
+      <div class="vocwave-bg"></div>
+      <div class="vocwave-fill"></div>
+    </div>
+    <div class="voc-dur">0:00</div>
+  </div>
+  <div class="voc-name">Екатерина</div>
+</div>
+
+<!-- ГОЛОСОВОЙ ОТЗЫВ 4 -->
+<div class="voc-wrapper">
+  <div class="voccard" onclick="toggleVoice(this, event)">
+    <audio src="assets/audio/voice4.mp3" preload="metadata" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
+    <button class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
+    <div class="vocwave-box" onclick="seekVoice(event, this)">
+      <div class="vocwave-bg"></div>
+      <div class="vocwave-fill"></div>
+    </div>
+    <div class="voc-dur">0:00</div>
+  </div>
+  <div class="voc-name">Дмитрий</div>
+</div>
+
 </div>
 </div>
 
@@ -659,22 +706,40 @@ function seekVideo(event, wrap) {
     video.currentTime = percentage * video.duration;
 }
 
+// ==== УПРАВЛЕНИЕ PLAY/PAUSE В БОЛЬШИХ КАРТОЧКАХ ====
 function togglePlayAction(container) {
-container.classList.add('has-started'); 
-const video = container.querySelector('.w-video');
-const btn = container.querySelector('.w-play-btn');
-if (video.paused) {
-video.play();
-btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
-btn.classList.add('is-playing');
-resetIdleTimer(container);
-} else {
-video.pause();
-btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
-btn.classList.remove('is-playing');
-container.classList.remove('ui-hidden');
-clearTimeout(container.idleTimeout);
-}
+    // Ставим на паузу все голосовые сообщения
+    document.querySelectorAll('.voccard audio').forEach(a => {
+        a.pause();
+        const b = a.parentElement.querySelector('.vocplay');
+        if(b) b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
+    });
+    // Ставим на паузу все видео кружочки
+    document.querySelectorAll('.vidcirc video').forEach(v => {
+        v.pause();
+        const b = v.nextElementSibling;
+        if(b && b.classList.contains('w-play-btn')) {
+            b.classList.remove('is-playing');
+            b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
+        }
+    });
+
+    container.classList.add('has-started'); 
+    const video = container.querySelector('.w-video');
+    const btn = container.querySelector('.w-play-btn');
+    
+    if (video.paused) {
+        video.play();
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+        btn.classList.add('is-playing');
+        resetIdleTimer(container);
+    } else {
+        video.pause();
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
+        btn.classList.remove('is-playing');
+        container.classList.remove('ui-hidden');
+        clearTimeout(container.idleTimeout);
+    }
 }
 
 function toggleFullScreen(btn, event) {
@@ -767,6 +832,7 @@ circles.forEach((c, index) => {
 });
 updateSlider();
 
+// Управление Play/Pause внутри кружков
 function toggleCircleVideo(container) {
     const circle = container.closest('.vidcirc');
     if (!circle.classList.contains('active')) return;
@@ -774,14 +840,24 @@ function toggleCircleVideo(container) {
     const btn = container.querySelector('.w-play-btn');
 
     if (video.paused) {
-        document.querySelectorAll('.vidcirc video').forEach(v => {
-            if(v !== video) {
-                v.pause(); v.currentTime = 0;
-                const b = v.nextElementSibling;
-                if(b && b.classList.contains('w-play-btn')) {
-                    b.classList.remove('is-playing');
-                    b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
+        // Пауза всех других медиа
+        document.querySelectorAll('video, audio').forEach(media => {
+            if(media !== video) {
+                media.pause();
+                // Сброс кнопок видео кружков
+                if(media.parentElement && media.parentElement.classList.contains('vc-in')){
+                     media.currentTime = 0;
+                     const b = media.nextElementSibling;
+                     if(b) { b.classList.remove('is-playing'); b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>'; }
                 }
+                // Сброс кнопок аудио
+                if(media.tagName.toLowerCase() === 'audio') {
+                    const b = media.parentElement.querySelector('.vocplay');
+                    if(b) b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
+                }
+                // Сброс кнопок больших видео
+                const b = media.parentElement.querySelector('.w-play-btn');
+                if(b && !media.parentElement.classList.contains('vc-in')) { b.classList.remove('is-playing'); b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>'; }
             }
         });
         video.play();
@@ -792,6 +868,81 @@ function toggleCircleVideo(container) {
         btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
         btn.classList.remove('is-playing');
     }
+}
+
+/* === ЛОГИКА ГОЛОСОВЫХ СООБЩЕНИЙ === */
+function formatTime(seconds) {
+    if (isNaN(seconds) || seconds === Infinity) return "0:00";
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function initVoice(audio) {
+    const durEl = audio.parentElement.querySelector('.voc-dur');
+    durEl.textContent = formatTime(audio.duration);
+}
+
+function updateVoiceProgress(audio) {
+    const fill = audio.parentElement.querySelector('.vocwave-fill');
+    const durEl = audio.parentElement.querySelector('.voc-dur');
+    if (audio.duration) {
+        const percent = (audio.currentTime / audio.duration) * 100;
+        fill.style.width = percent + '%';
+        durEl.textContent = formatTime(audio.currentTime);
+    }
+}
+
+function resetVoice(audio) {
+    const card = audio.parentElement;
+    const btn = card.querySelector('.vocplay');
+    const fill = card.querySelector('.vocwave-fill');
+    const durEl = card.querySelector('.voc-dur');
+    
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
+    fill.style.width = '0%';
+    durEl.textContent = formatTime(audio.duration);
+}
+
+function toggleVoice(card, event) {
+    if(event.target.closest('.vocwave-box')) return; 
+
+    const audio = card.querySelector('audio');
+    const btn = card.querySelector('.vocplay');
+
+    if (audio.paused) {
+        // Останавливаем все другие медиа файлы на странице
+        document.querySelectorAll('video, audio').forEach(media => {
+            if (media !== audio) {
+                media.pause();
+                if(media.tagName.toLowerCase() === 'audio') {
+                    const b = media.parentElement.querySelector('.vocplay');
+                    if(b) b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
+                } else {
+                     const b = media.parentElement.querySelector('.w-play-btn');
+                     if(b) { b.classList.remove('is-playing'); b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>'; }
+                }
+            }
+        });
+
+        audio.play();
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+    } else {
+        audio.pause();
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
+    }
+}
+
+function seekVoice(event, box) {
+    const card = box.parentElement;
+    const audio = card.querySelector('audio');
+    if (!audio.duration) return;
+    
+    const rect = box.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+    const percentage = Math.max(0, Math.min(1, clickX / rect.width));
+    
+    audio.currentTime = percentage * audio.duration;
 }
 /* ========================================= */
 

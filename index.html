@@ -167,29 +167,40 @@ section { position: relative; z-index: 10; }
 .rcard:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border-color: rgba(255, 184, 0, 0.3); }
 
 /* ПРОПОРЦИИ КЕЙСОВ */
-.rimg-wrap { aspect-ratio: 671 / 1035; width: 100%; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #0a0a0a;}
-.rimg { width: 100%; height: 100%; object-fit: contain; transition: none !important; transform: none !important; }
+.rimg-wrap { 
+    aspect-ratio: 671 / 1035; 
+    width: 100%; 
+    position: relative; 
+    overflow: hidden; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background: #0a0a0a;
+}
+
+.rimg { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    transform: scale(1.02); 
+    transition: transform 0.3s ease; 
+}
 
 /* ЗАЩИТА NDA ИЗОБРАЖЕНИЙ */
 .nda-card .rimg {
-    filter: grayscale(100%);
-    pointer-events: none !important; /* Отключаем любые взаимодействия */
-    user-select: none !important; /* Отключаем выделение */
+    pointer-events: none !important; 
+    user-select: none !important; 
     -webkit-user-select: none !important;
-    -webkit-user-drag: none !important; /* Отключаем перетаскивание */
+    -webkit-user-drag: none !important; 
 }
 
 .rtxt-box { padding: 20px 24px; display: flex; flex-direction: column; gap: 6px; background: #080604; flex-grow: 1; justify-content: center; position: relative; z-index: 5; border-top: 1px solid rgba(255,255,255,0.05); }
 .rtxt-main { font-family: 'Involve', sans-serif; font-size: 22px; font-weight: 700; color: var(--y); line-height: 1.1; letter-spacing: -0.02em; }
 .rtxt-sub { font-size: 13px; color: rgba(232, 230, 222, 0.6); line-height: 1.4; }
 
-/* Общая маска для всех NDA карточек: Идеально резкий срез */
 .rblur { 
     position: absolute; 
     inset: 0; 
-    backdrop-filter: blur(45px);
-    -webkit-backdrop-filter: blur(45px);
-    background: rgba(8, 6, 4, 0.65); 
     display: flex; 
     flex-direction: column; 
     align-items: center; 
@@ -197,9 +208,19 @@ section { position: relative; z-index: 10; }
     gap: 11px; 
     z-index: 2; 
     pointer-events: none;
-    
-    mask-image: linear-gradient(to bottom, black 0%, black 91.5%, transparent 92.5%);
-    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 91.5%, transparent 92.5%);
+}
+
+.rblur::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;  
+    height: 130px; 
+    background: rgba(30, 30, 30, 0.75); 
+    filter: blur(25px); 
+    z-index: -1; 
 }
 
 .rlock { width: 42px; height: 42px; border-radius: 50%; background: rgba(255, 255, 255, .03); border: 1px solid var(--bor); display: flex; align-items: center; justify-content: center; }
@@ -378,7 +399,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 </a>
 <a href="mailto:your@email.com" class="bsec">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-<span data-ru="Написать Email" data-en="Write an Email">Написать Email</span>
+<span data-ru="Написать Email" data-en="Email Me">Написать Email</span>
 </a>
 </div>
 <div class="sdown"><span data-ru="ЛИСТАЙ" data-en="SCROLL">ЛИСТАЙ</span>
@@ -397,7 +418,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="cnt">
 <div class="ft">
 <div class="slbl" data-ru="Портфолио" data-en="Portfolio">Портфолио</div>
-<h2 class="stitle" data-ru="Вертикальные работы" data-en="Vertical Works">Вертикальные работы</h2>
+<h2 class="stitle" data-ru="Вертикальные работы" data-en="Vertical Projects">Вертикальные работы</h2>
 </div>
 <div class="vgrid rs" id="vg"></div>
 </div>
@@ -407,7 +428,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="cnt">
 <div class="ft">
 <div class="slbl" data-ru="Портфолио" data-en="Portfolio">Портфолио</div>
-<h2 class="stitle" data-ru="Горизонтальные работы" data-en="Horizontal Works">Горизонтальные работы</h2>
+<h2 class="stitle" data-ru="Горизонтальные работы" data-en="Horizontal Projects">Горизонтальные работы</h2>
 </div>
 <div class="hgrid rs" id="hg"></div>
 </div>
@@ -450,7 +471,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 </div>
 <div class="ab-btns">
 <a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="bpri"><svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" /></svg> <span data-ru="Обсудить проект" data-en="Discuss Project">Обсудить проект</span></a>
-<a href="mailto:your@email.com" class="bsec"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span data-ru="Написать Email" data-en="Write an Email">Написать Email</span></a>
+<a href="mailto:your@email.com" class="bsec"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span data-ru="Написать Email" data-en="Email Me">Написать Email</span></a>
 </div>
 </div>
 </div>
@@ -463,7 +484,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="cnt">
 <div class="ft">
 <div class="slbl" data-ru="Отзывы" data-en="Reviews">Отзывы</div>
-<h2 class="stitle" data-ru="Что говорят клиенты" data-en="Что говорят клиенты">Что говорят клиенты</h2>
+<h2 class="stitle" data-ru="Что говорят клиенты" data-en="What clients say">Что говорят клиенты</h2>
 </div>
 <div class="rbox fu">
 <div class="rvid ru-only">
@@ -480,7 +501,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
       <div class="w-play-btn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
     </div>
   </div>
-  <div class="vc-name">Аркадий</div>
+  <div class="vc-name">Семён</div>
 </div>
 <div class="vidcirc" data-index="1">
   <div class="vc-ring">
@@ -489,7 +510,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
       <div class="w-play-btn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
     </div>
   </div>
-  <div class="vc-name">Валерий</div>
+  <div class="vc-name">Марк</div>
 </div>
 <div class="vidcirc" data-index="2">
   <div class="vc-ring">
@@ -498,7 +519,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
       <div class="w-play-btn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
     </div>
   </div>
-  <div class="vc-name">Probazis</div>
+  <div class="vc-name">Айша</div>
 </div>
 <div class="vidcirc" data-index="3">
   <div class="vc-ring">
@@ -507,7 +528,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
       <div class="w-play-btn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
     </div>
   </div>
-  <div class="vc-name">Клиент 4</div>
+  <div class="vc-name">Александр</div>
 </div>
 </div>
 <button class="slider-btn" id="nextBtn">
@@ -525,7 +546,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
     <div class="vocwave-box" onclick="seekVoice(event, this)"><div class="vocwave-bg"></div><div class="vocwave-fill"></div></div>
     <div class="voc-dur">0:00</div>
   </div>
-  <div class="voc-name">Александр</div>
+  <div class="voc-name">@keingnade</div>
 </div>
 <div class="voc-wrapper">
   <div class="voccard" onclick="toggleVoice(this, event)">
@@ -534,7 +555,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
     <div class="vocwave-box" onclick="seekVoice(event, this)"><div class="vocwave-bg"></div><div class="vocwave-fill"></div></div>
     <div class="voc-dur">0:00</div>
   </div>
-  <div class="voc-name">Максим</div>
+  <div class="voc-name">Max</div>
 </div>
 <div class="voc-wrapper">
   <div class="voccard" onclick="toggleVoice(this, event)">
@@ -543,16 +564,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
     <div class="vocwave-box" onclick="seekVoice(event, this)"><div class="vocwave-bg"></div><div class="vocwave-fill"></div></div>
     <div class="voc-dur">0:00</div>
   </div>
-  <div class="voc-name">Екатерина</div>
-</div>
-<div class="voc-wrapper">
-  <div class="voccard" onclick="toggleVoice(this, event)">
-    <audio src="assets/audio/voice4.mp3" preload="metadata" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
-    <button class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
-    <div class="vocwave-box" onclick="seekVoice(event, this)"><div class="vocwave-bg"></div><div class="vocwave-fill"></div></div>
-    <div class="voc-dur">0:00</div>
-  </div>
-  <div class="voc-name">Дмитрий</div>
+  <div class="voc-name">@threehuna</div>
 </div>
 </div>
 </div>
@@ -561,23 +573,25 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="txrgrid">
 <div class="txr">
 <div class="txrq">"</div>
-<p class="rtxt" data-ru="Илья сделал монтаж на высочайшем уровне. Видео набрало рекордные просмотры. Рекомендую!" data-en="Ilya edited the video at the highest level. The video got record views. Highly recommended!">Илья сделал монтаж на высочайшем уровне. Видео набрало рекордные просмотры. Рекомендую!</p>
-<div class="rauth" data-ru="— Аркадий" data-en="— Arkady">— Аркадий</div>
+<p class="rtxt" data-ru="Делал с Ильей edit для продвижения треков в жанре Phonk/Funk — очень круто, дало буст в Тик-ток и Ютуб Шортс. Все видео заряжены драйвом!" data-en="Did a Phonk/Funk edit with Ilya for track promotion — it was very cool and gave a boost on TikTok and YouTube Shorts. All videos were charged with drive!">Делал с Ильей edit для продвижения треков в жанре Phonk/Funk — очень круто, дало буст в Тик-ток и Ютуб Шортс. Все видео заряжены драйвом!</p>
+<div class="rauth" data-ru="— Max" data-en="— Ivan Ilichev">— Ivan Ilichev</div>
 </div>
 <div class="txr">
 <div class="txrq">"</div>
-<p class="rtxt" data-ru="Профессиональный подход, внимание к деталям, результат превзошёл все ожидания." data-en="Professional approach, attention to detail, the result exceeded all expectations.">Профессиональный подход, внимание к деталям, результат превзошёл все ожидания.</p>
-<div class="rauth" data-ru="— Валерий" data-en="— Valery">— Валерий</div>
+<p class="rtxt" data-ru="Настоящий профессионал: работал чётко, оперативно и вносил дельные предложения, которые улучшили итоговый результат. Всё на 10 из 10!" data-en="A true professional: worked clearly, promptly, and made sensible suggestions that improved the final result. Everything is 10 out of 10!">Настоящий профессионал: работал чётко, оперативно и вносил дельные предложения, которые улучшили итоговый результат. Всё на 10 из 10!</p>
+<div class="rauth" data-ru="— @malashkka" data-en="— @malashkka">— @malashkka</div>
 </div>
 <div class="txr">
 <div class="txrq">"</div>
-<p class="rtxt" data-ru="Контент стал заметно лучше, охваты выросли. Сроки соблюдены, всё чётко." data-en="Content became noticeably better, reach has grown. Deadlines met, everything is perfect.">Контент стал заметно лучше, охваты выросли. Сроки соблюдены, всё чётко.</p>
-<div class="rauth">— Probazis</div>
+<p class="rtxt" data-ru="Сотрудничаю с Ильёй уже полгода. Быстро отвечает, работу выполняет в срок, не подводил. Техника на уровне, цена справедливая. Рекомендую!" data-en="I've been collaborating with Ilya for six months. He responds quickly, meets deadlines, and hasn't let me down. Top-tier gear, fair pricing. Recommended!">Сотрудничаю с Ильёй уже полгода. Быстро отвечает, работу выполняет в срок, не подводил. Техника на уровне, цена справедливая. Рекомендую!</p>
+<div class="rauth">— Roman Camomile</div>
 </div>
 <div class="txr">
 <div class="txrq">"</div>
-<p class="rtxt" data-ru="Работает быстро, качественно и с душой. Именно такой монтажёр, которого искал." data-en="Works fast, with high quality and soul. Exactly the video editor I was looking for.">Работает быстро, качественно и с душой. Именно такой монтажёр, которого искал.</p>
-<div class="rauth" data-ru="— Клиент" data-en="— Client">— Клиент</div>
+<p class="rtxt" data-ru="Работать было очень комфортно. Прислушивается к пожеланиям и выполняет всё качественно и в срок! Буду рекомендовать специалиста." data-en="It was very comfortable to work together. He listens to requests and delivers everything with high quality and on time! I will recommend him.">Работать было очень комфортно. Прислушивается к пожеланиям и выполняет всё качественно и в срок! Буду рекомендовать специалиста.</p>
+<div class="rauth" data-ru="— @olgavideobrand" data-en="— @olgavideobrand">— @olgavideobrand</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -591,7 +605,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="cnt">
 <div class="ft">
 <div class="slbl">FAQ</div>
-<h2 class="stitle" data-ru="Частые вопросы" data-en="Frequent Questions">Частые вопросы</h2>
+<h2 class="stitle" data-ru="Частые вопросы" data-en="Frequently Asked Questions">Частые вопросы</h2>
 </div>
 <div class="flist fu" id="fl"></div>
 </div>
@@ -606,7 +620,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <h2 class="ctatitle" data-ru="Готов вывести свой контент на новый уровень?" data-en="Ready to take your content to the next level?">Готов вывести свой контент на новый уровень?</h2>
 <div class="ctabtns">
 <a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="bpri"><svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" /></svg> <span data-ru="Получить консультацию" data-en="Get a Consultation">Получить консультацию</span></a>
-<a href="mailto:your@email.com" class="bsec"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span data-ru="Написать Email" data-en="Write an Email">Написать Email</span></a>
+<a href="mailto:your@email.com" class="bsec"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span data-ru="Написать Email" data-en="Email Me">Написать Email</span></a>
 </div>
 </div>
 </div>
@@ -633,11 +647,11 @@ const LOGOS = [
 
 const VW = [
 { l: 'Reels · SMM', t: 'Probazis', v: 'assets/videos/v1.mp4', p: 'assets/covers_h/cover1.png' },
-{ l: 'Shorts · Спорт', t: 'FSCR', v: 'assets/videos/v2.mp4', p: 'assets/covers_h/cover2.png' },
+{ l: 'Shorts · Спорт', t: 'FSCR', v: 'assets/videos/v2.mp4', p: 'assets/covers_h/cover4.png' },
 { l: 'Reels · Бизнес', t: 'Remstart', v: 'assets/videos/v3.mp4', p: 'assets/covers_h/cover3.png' },
-{ l: 'Reels · Недвижимость', t: 'fullflat', v: 'assets/videos/v4.mp4', p: 'assets/covers_h/cover4.png' },
-{ l: 'Shorts · Продукт', t: 'Nutreasy', v: 'assets/videos/v5.mp4', p: 'assets/covers_h/cover5.png' },
-{ l: 'Reels · Медиа', t: 'Region Online', v: 'assets/videos/v6.mp4', p: 'assets/covers_h/cover6.png' }
+{ l: 'Reels · Недвижимость', t: 'fullflat', v: 'assets/videos/v4.mp4', p: 'assets/covers_h/cover2.png' },
+{ l: 'Shorts · Продукт', t: 'Nutreasy', v: 'assets/videos/v5.mp4', p: 'assets/covers_h/cover6.png' },
+{ l: 'Reels · Медиа', t: 'Region Online', v: 'assets/videos/v6.mp4', p: 'assets/covers_h/cover5.png' }
 ];
 
 const HW = [
@@ -648,7 +662,6 @@ const HW = [
 ];
 
 const RS = [
-  // --- ЗАБЛЮРЕННЫЕ КЕЙСЫ (NDA) ---
   { 
     type: 'blur', 
     img: 'assets/images/nda1.png', 
@@ -670,8 +683,6 @@ const RS = [
     sub: 'Просмотров для<br>крупного автора',
     subEn: 'Likes under one<br>client Reels' 
   },
-
-  // --- ОТКРЫТЫЕ КЕЙСЫ (с указанием подписчиков) ---
   { 
     type: 'open', 
     img: 'assets/images/case1.png', 
@@ -679,17 +690,17 @@ const RS = [
     sub: 'Просмотров при 2400<br>подписчиках', 
     subEn: 'Views with 2400<br>followers' 
   },
-  { 
+{ 
     type: 'open', 
     img: 'assets/images/case2.png', 
-    main: '154K', 
-    sub: 'Просмотров при 950 <br>подписчиках', 
-    subEn: 'Views with 950 <br>followers' 
+    main: '218K', 
+    sub: 'Просмотров, видео принесло<br>автору <span style="color: var(--y);">+600</span> подписчиков', 
+    subEn: 'Views, the video brought<br>the author <span style="color: var(--y);">+600</span> followers' 
   },
   { 
     type: 'open', 
     img: 'assets/images/case3.png', 
-    main: '82.6K+', 
+    main: '82K+', 
     sub: 'Просмотров при 850<br>подписчиках', 
     subEn: 'Views with 850<br>followers' 
   }
@@ -698,7 +709,7 @@ const RS = [
 const FAQ = [
 { q: { ru: 'Какая стоимость за видео?', en: 'What is the price per video?' }, a: { ru: 'Стоимость для каждого проекта индивидуальна и может зависеть от множества факторов, в первую очередь от сложности и объема работы. Давайте обсудим ваш проект, и я смогу подсказать точную стоимость.', en: "The cost for each project is individual and depends on multiple factors, primarily the complexity and volume of work. Let's discuss your project and I'll be able to give you the exact price." } },
 { q: { ru: 'Какие сроки выполнения работы?', en: 'What are the timelines?' }, a: { ru: 'Сроки для каждого проекта могут варьироваться от 1 дня до нескольких недель и также зависят в первую очередь от сложности и объема работы, а также от моей занятости на момент начала работы. На этапе обсуждения проекта без проблем смогу подсказать точные сроки.', en: 'The timeline for each project can vary from 1 day to several weeks, depending primarily on the complexity and volume of the work, as well as my current workload. I will be happy to provide exact deadlines during our project discussion.' } },
-{ q: { ru: 'Что нужно для начала?', en: 'Что нужно для начала?' }, a: { ru: 'Для начала работы потребуется ТЗ, материалы и референсы (при их наличии). ТЗ не обязательно должно быть максимально подробным и следовать каким-то определенным правилам, и при необходимости буду готов помочь с его составлением.', en: "To start working, I'll need a brief, materials, and references (if any). The brief doesn't have to be perfectly detailed or follow strict rules, and I'll be glad to help you put one together if needed." } },
+{ q: { ru: 'Что нужно для начала?', en: 'What do you need to start?' }, a: { ru: 'Для начала работы потребуется ТЗ, материалы и референсы (при их наличии). ТЗ не обязательно должно быть максимально подробным и следовать каким-то определенным правилам, и при необходимости буду готов помочь с его составлением.', en: "To start working, I'll need a brief, materials, and references (if any). The brief doesn't have to be perfectly detailed or follow strict rules, and I'll be glad to help you put one together if needed." } },
 { q: { ru: 'Сколько правок доступно?', en: 'How many revisions are included?' }, a: { ru: 'Все правки, которые совершил по своей вине, абсолютно бесплатны. Но если потребуется что-то добавить или внести изменения, которые не прописаны в изначальном ТЗ, они потребуют небольшой доплаты.', en: 'All revisions made due to my fault are absolutely free. However, if you need to add something or make changes that were not included in the original brief, a small additional fee will be required.' } }
 ];
 
@@ -840,7 +851,6 @@ function buildResults() {
         const isBlur = r.type === 'blur';
         const cardClass = isBlur ? 'rcard nda-card' : 'rcard';
         
-        // Для NDA добавляем жесткую защиту от любых взаимодействий
         const imagePart = isBlur ? `
             <img src="${r.img}" class="rimg" loading="lazy" alt="Кейс NDA" draggable="false">
             <div class="rblur">
@@ -851,7 +861,6 @@ function buildResults() {
             </div>` : 
             `<img src="${r.img}" class="rimg" loading="lazy" alt="Кейс">`;
         
-        // Добавляем блок правой кнопки мыши для контейнера картинки NDA
         const wrapAttrs = isBlur ? 'oncontextmenu="return false;" draggable="false"' : '';
 
         return `
@@ -875,7 +884,15 @@ function tl() {
 lang = lang === 'ru' ? 'en' : 'ru';
 document.getElementById('lb').textContent = lang === 'ru' ? 'EN' : 'RU';
 if(lang === 'en') { document.body.classList.add('lang-en'); } else { document.body.classList.remove('lang-en'); }
-document.querySelectorAll('[data-ru]').forEach(el => { const t = lang === 'ru' ? el.dataset.ru : el.dataset.en; if (t) el.innerHTML = t; });
+document.querySelectorAll('[data-ru]').forEach(el => {
+    let t;
+    if (el.tagName === 'H2' && el.parentElement.parentElement.id.includes('works')) {
+        t = lang === 'ru' ? el.dataset.ru : el.dataset.en.replace('Works', 'Projects');
+    } else {
+        t = lang === 'ru' ? el.dataset.ru : el.dataset.en;
+    }
+    if (t) el.innerHTML = t;
+});
 buildWorks(); buildResults(); buildFAQ();
 }
 
@@ -1054,7 +1071,28 @@ setTimeout(tick, 50);
 tick();
 })();
 
-buildTicker(); buildWorks(); buildResults(); buildFAQ();
+function initialTranslate() {
+    const titles = document.querySelectorAll('#works h2.stitle');
+    titles.forEach(title => {
+        if (title.dataset.en) {
+            title.dataset.en = title.dataset.en.replace('Works', 'Projects');
+        }
+    });
+    
+    const navLink = document.querySelector('.nlinks a[data-s="works"]');
+    if (navLink && navLink.dataset.en) {
+        navLink.dataset.en = navLink.dataset.en.replace('Works', 'Projects');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initialTranslate();
+    buildTicker(); 
+    buildWorks(); 
+    buildResults(); 
+    buildFAQ();
+});
+
 </script>
 </body>
 </html>

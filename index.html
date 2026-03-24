@@ -256,7 +256,7 @@ section { position: relative; z-index: 10; }
 .rvid, .rvoice, .rtxts { padding: 40px 0; }
 .rvid { padding-top: 15px; }
 .rgst { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: rgba(255, 255, 255, 0.3); font-weight: 700; margin-bottom: 28px; }
-.vid-slider-wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; max-width: 1000px; margin: 0 auto; padding: 20px 0; }
+.vid-slider-wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; max-width: 1000px; margin: 0 auto; padding: 20px 0; overflow-x: hidden; }
 .slider-btn { position: relative; background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; transition: color 0.3s, transform 0.2s; padding: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; outline: none; }
 .slider-btn:hover { color: var(--y); transform: scale(1.1); }
 .vid-track { position: relative; flex: 1; max-width: 820px; height: 440px; display: flex; align-items: center; justify-content: center; }
@@ -519,7 +519,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="vidcirc" data-index="0">
   <div class="vc-ring">
     <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/videos/rev1.mp4" loop playsinline preload="metadata"></video>
+      <video src="assets/rev/rev1.mp4" loop playsinline preload="metadata"></video>
       <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     </div>
   </div>
@@ -528,7 +528,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="vidcirc" data-index="1">
   <div class="vc-ring">
     <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/videos/rev2.mp4" loop playsinline preload="metadata"></video>
+      <video src="assets/rev/rev2.mp4" loop playsinline preload="metadata"></video>
       <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     </div>
   </div>
@@ -537,7 +537,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="vidcirc" data-index="2">
   <div class="vc-ring">
     <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/videos/rev3.mp4" loop playsinline preload="metadata"></video>
+      <video src="assets/rev/rev3.mp4" loop playsinline preload="metadata"></video>
       <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     </div>
   </div>
@@ -546,7 +546,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="vidcirc" data-index="3">
   <div class="vc-ring">
     <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/videos/rev4.mp4" loop playsinline preload="metadata"></video>
+      <video src="assets/rev/rev4.mp4" loop playsinline preload="metadata"></video>
       <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     </div>
   </div>
@@ -667,19 +667,19 @@ const LOGOS = [
 ];
 
 const VW = [
-{ l: 'Reels · SMM', t: 'Probazis', v: 'assets/videos/v1.mp4', p: 'assets/covers_h/cover1.png' },
-{ l: 'Shorts · Спорт', t: 'FSCR', v: 'assets/videos/v2.mp4', p: 'assets/covers_h/cover4.png' },
-{ l: 'Reels · Бизнес', t: 'Remstart', v: 'assets/videos/v3.mp4', p: 'assets/covers_h/cover3.png' },
-{ l: 'Reels · Недвижимость', t: 'fullflat', v: 'assets/videos/v4.mp4', p: 'assets/covers_h/cover2.png' },
-{ l: 'Shorts · Продукт', t: 'Nutreasy', v: 'assets/videos/v5.mp4', p: 'assets/covers_h/cover6.png' },
-{ l: 'Reels · Медиа', t: 'Region Online', v: 'assets/videos/v6.mp4', p: 'assets/covers_h/cover5.png' }
+{ l: 'Reels · SMM', t: 'Probazis', v: 'assets/videos_v/v1.mp4', p: 'assets/covers_h/cover1.png' },
+{ l: 'Shorts · Спорт', t: 'FSCR', v: 'assets/videos_v/v2.mp4', p: 'assets/covers_h/cover4.png' },
+{ l: 'Reels · Бизнес', t: 'Remstart', v: 'assets/videos_v/v3.mp4', p: 'assets/covers_h/cover3.png' },
+{ l: 'Reels · Недвижимость', t: 'fullflat', v: 'assets/videos_v/v4.mp4', p: 'assets/covers_h/cover2.png' },
+{ l: 'Shorts · Продукт', t: 'Nutreasy', v: 'assets/videos_v/v5.mp4', p: 'assets/covers_h/cover6.png' },
+{ l: 'Reels · Медиа', t: 'Region Online', v: 'assets/videos_v/v6.mp4', p: 'assets/covers_h/cover5.png' }
 ];
 
 const HW = [
-{ l: 'YouTube · Обзор', t: 'Probazis', v: 'assets/videos/h1.mp4', p: 'assets/covers_v/cover1.png' },
-{ l: 'YouTube · Travel', t: 'ПОЗДРАВЛЕНИЕ ИЗ АФРИКИ', v: 'assets/videos/h2.mp4', p: 'assets/covers_v/cover2.png' },
-{ l: 'Highlight · Реклама', t: 'Шкафы Нарния', v: 'assets/videos/h3.mp4', p: 'assets/covers_v/cover3.png' },
-{ l: 'Corporate · Корпоратив', t: 'Remstart', v: 'assets/videos/h4.mp4', p: 'assets/covers_v/cover4.png' }
+{ l: 'YouTube · Обзор', t: 'Probazis', v: 'assets/videos_h/h1.mp4', p: 'assets/covers_v/cover1.png' },
+{ l: 'YouTube · Travel', t: 'ПОЗДРАВЛЕНИЕ ИЗ АФРИКИ', v: 'assets/videos_h/h2.mp4', p: 'assets/covers_v/cover2.png' },
+{ l: 'Highlight · Реклама', t: 'Шкафы Нарния', v: 'assets/videos_h/h3.mp4', p: 'assets/covers_v/cover3.png' },
+{ l: 'Corporate · Корпоратив', t: 'Remstart', v: 'assets/videos_h/h4.mp4', p: 'assets/covers_v/cover4.png' }
 ];
 
 const RS = [
@@ -1085,7 +1085,7 @@ octx.putImageData(id, 0, 0); ctx.clearRect(0, 0, w, h); ctx.fillStyle = ctx.crea
 setTimeout(tick, 50);
 }
 tick();
-})();a
+})();
 
 document.addEventListener('DOMContentLoaded', () => {
     buildTicker(); 

@@ -5,13 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="KLAGE — создание выдающегося и уникального визуала. Профессиональный монтаж видео, Reels, Shorts и контент, который помогает брендам выйти на новый уровень.">
 
-<!-- Базовые заголовки безопасности (Security Optimization) -->
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <title>KLAGE | PORTFOLIO</title>
 
-<!-- Оптимизированная загрузка шрифтов (только кириллица и латиница) -->
 <link rel="preload" href="assets/fonts/Involve.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,9 +20,6 @@
 </noscript>
 
 <style>
-/* =========================================
-ЛОКАЛЬНЫЕ ШРИФТЫ
-========================================= */
 @font-face { font-family: 'Involve'; src: url('assets/fonts/Involve.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Good Vibes Pro'; src: url('assets/fonts/GoodVibesPro.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 
@@ -43,21 +38,20 @@ body { background: #030100; color: var(--tx); font-family: 'Inter', sans-serif; 
 
 #wrap { position: relative; overflow-x: hidden; }
 
-/* ФОН (АНИМАЦИЯ) */
+/* ФОН */
 #bg { position: fixed; inset: 0; z-index: 0; background: #020100; overflow: hidden; }
 .bg-sphere { position: absolute; border-radius: 50%; filter: blur(150px); pointer-events: none; will-change: transform, opacity; }
-.sphere-1 { width: 70vw; height: 70vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.3) 0%, rgba(255, 160, 0, 0) 70%); top: -20vw; left: -20vw; animation: pulse1 6s infinite alternate ease-in-out; }
-.sphere-2 { width: 65vw; height: 65vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.25) 0%, rgba(255, 160, 0, 0) 70%); bottom: -20vw; right: -20vw; animation: pulse2 7s infinite alternate ease-in-out; }
+.sphere-1 { width: 70vw; height: 70vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.3) 0%, rgba(255, 160, 0, 0) 70%); top: -20vw; left: -20vw; animation: pulse1 6s infinite alternate ease-in-out; transform: translateZ(0); }
+.sphere-2 { width: 65vw; height: 65vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.25) 0%, rgba(255, 160, 0, 0) 70%); bottom: -20vw; right: -20vw; animation: pulse2 7s infinite alternate ease-in-out; transform: translateZ(0); }
 
-@keyframes pulse1 { 0% { transform: scale(1) translate(0, 0); opacity: 0.5; } 100% { transform: scale(1.1) translate(6vw, 6vw); opacity: 1; } }
-@keyframes pulse2 { 0% { transform: scale(1) translate(0, 0); opacity: 1; } 100% { transform: scale(1.15) translate(-6vw, -6vw); opacity: 0.6; } }
+@keyframes pulse1 { 0% { transform: scale(1) translate3d(0, 0, 0); opacity: 0.5; } 100% { transform: scale(1.1) translate3d(6vw, 6vw, 0); opacity: 1; } }
+@keyframes pulse2 { 0% { transform: scale(1) translate3d(0, 0, 0); opacity: 1; } 100% { transform: scale(1.15) translate3d(-6vw, -6vw, 0); opacity: 0.6; } }
 
-/* HERO & NAV */
 #hero-wrap { position: relative; overflow: hidden; width: 100%; } 
-@keyframes navDrop { from { opacity: 0; transform: translate(-50%, -20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes navDrop { from { opacity: 0; transform: translate3d(-50%, -20px, 0); } to { opacity: 1; transform: translate3d(-50%, 0, 0); } }
 
 nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); z-index: 600; width: 100%; max-width: 1000px; height: 64px; padding: 0 16px 0 34px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; transition: all .6s cubic-bezier(0.22, 1, 0.36, 1); white-space: nowrap; opacity: 0; animation: navDrop 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-nav::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 100px; background: rgba(8, 6, 4, .5); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, .08); box-shadow: 0 4px 40px rgba(0, 0, 0, .5); opacity: 0; transition: opacity .4s ease; pointer-events: none; }
+nav::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 100px; background: rgba(8, 6, 4, .5); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, .08); box-shadow: 0 4px 40px rgba(0, 0, 0, .5); opacity: 0; transition: opacity .4s ease; pointer-events: none; transform: translateZ(0); -webkit-transform: translateZ(0); will-change: opacity; }
 nav.sc::before { opacity: 1; }
 nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; }
 
@@ -73,61 +67,46 @@ nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; }
 .lbtn:hover { color: #fff; border-color: rgba(255, 255, 255, .35); }
 
 #hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 100px 24px; position: relative; width: 100%; }
-.htitle { display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; transform: translateY(30px); animation: fi .9s .3s forwards; position: relative; z-index: 2; }
+.htitle { display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; transform: translate3d(0, 30px, 0); animation: fi .9s .3s forwards; position: relative; z-index: 2; will-change: opacity, transform; }
 .hsup { font-family: 'Involve', sans-serif; font-size: clamp(8.5px, 2.2vw, 9.5px); font-weight: 700; letter-spacing: 0.25em; padding-left: 0.25em; text-transform: uppercase; color: #ffaa00; text-shadow: 0 0 12px rgba(255, 170, 0, 0.4); margin-bottom: -4px; text-align: center; }
 .hhand { font-family: 'Manrope', sans-serif; font-size: clamp(20px, 3.5vw, 36px); font-weight: 300; letter-spacing: 0.03em; text-transform: none; color: #fff; margin: 0; position: relative; z-index: 2; line-height: 1; }
 
-.gw-container { position: relative; display: inline-grid; place-items: center; }
+.gw-container { position: relative; display: inline-grid; place-items: center; transform: translateZ(0); }
 .gw-blur, .gw-sharp, .gw-text { grid-area: 1 / 1; font-family: 'Involve', sans-serif; font-size: clamp(48px, 11vw, 130px); font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1; }
 
-/* ОПТИМИЗИРОВАННАЯ АНИМАЦИЯ СВЕЧЕНИЯ ДЛЯ PAGESPEED */
 .gw-blur { 
-    color: #fff; 
-    filter: blur(6px); 
-    user-select: none; 
-    pointer-events: none; 
+    color: #fff; filter: blur(6px); user-select: none; pointer-events: none; 
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 200, 0, 0.9), 0 0 60px rgba(255, 160, 0, 0.8), 0 0 220px rgba(255, 110, 0, 0.5), 0 0 300px rgba(255, 60, 0, 0.3); 
-    will-change: opacity;
-    animation: gp-opacity 3s ease-in-out infinite alternate; 
+    will-change: opacity; animation: gp-opacity 3s ease-in-out infinite alternate; transform: translateZ(0);
 }
 @keyframes gp-opacity { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
 .gw-sharp { color: #fff; user-select: none; pointer-events: none; text-shadow: 0 0 8px rgba(255, 255, 255, 0.6); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%); }
 .gw-text { color: transparent; user-select: text; z-index: 5; }
 
-.hsub { max-width: 520px; font-size: clamp(14px, 1.55vw, 16.5px); font-weight: 400; line-height: 1.75; color: var(--mu); margin-top: 25px; margin-bottom: 35px; opacity: 0; transform: translateY(30px); animation: fi 1s .5s forwards; position: relative; z-index: 10; }
-.hbtns { display: flex; gap: 11px; flex-wrap: wrap; justify-content: center; opacity: 0; transform: translateY(30px); animation: fi 1s .7s forwards; position: relative; z-index: 10; }
+.hsub { max-width: 520px; font-size: clamp(14px, 1.55vw, 16.5px); font-weight: 400; line-height: 1.75; color: var(--mu); margin-top: 25px; margin-bottom: 35px; opacity: 0; transform: translate3d(0, 30px, 0); animation: fi 1s .5s forwards; position: relative; z-index: 10; will-change: opacity, transform; }
+.hbtns { display: flex; gap: 11px; flex-wrap: wrap; justify-content: center; opacity: 0; transform: translate3d(0, 30px, 0); animation: fi 1s .7s forwards; position: relative; z-index: 10; will-change: opacity, transform; }
 
 .sdown { position: absolute; bottom: 34px; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 7px; font-size: 10px; letter-spacing: .25em; color: var(--mu); opacity: 0; animation: fi 1s 1.2s forwards; z-index: 10; }
 .sline { width: 1px; height: 38px; background: linear-gradient(to bottom, var(--y), transparent); animation: sd 2.2s ease-in-out infinite }
 @keyframes sd { 0%, 100% { transform: scaleY(1); opacity: 1 } 50% { transform: scaleY(.5); opacity: .3 } }
-@keyframes fi { to { opacity: 1; transform: translateY(0); } }
+@keyframes fi { to { opacity: 1; transform: translate3d(0,0,0); } }
 
 .bpri { background: var(--y); color: #000; font-weight: 700; font-size: 13.5px; padding: 13px 26px; border-radius: 100px; text-decoration: none; letter-spacing: .05em; display: inline-flex; align-items: center; justify-content: center; gap: 9px; transition: transform .22s, box-shadow .22s; white-space: nowrap; }
 .bpri:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--yg), 0 0 60px rgba(255, 184, 0, .15) }
 
-.bsec { background: rgba(255, 255, 255, .05); color: var(--tx); border: 1px solid var(--bor); font-weight: 600; font-size: 13.5px; padding: 13px 26px; border-radius: 100px; text-decoration: none; letter-spacing: .05em; display: inline-flex; align-items: center; justify-content: center; gap: 9px; backdrop-filter: blur(10px); transition: transform .22s, background .22s; white-space: nowrap; }
+.bsec { background: rgba(255, 255, 255, .05); color: var(--tx); border: 1px solid var(--bor); font-weight: 600; font-size: 13.5px; padding: 13px 26px; border-radius: 100px; text-decoration: none; letter-spacing: .05em; display: inline-flex; align-items: center; justify-content: center; gap: 9px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: transform .22s, background .22s; white-space: nowrap; }
 .bsec:hover { transform: scale(1.05); background: rgba(255, 255, 255, .09) }
 
-.ft { opacity: 0; transform: translateY(30px); transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1); }
-.ft.on { opacity: 1; transform: translateY(0); }
-.fu { opacity: 0; transform: translateY(44px); transition: opacity .72s cubic-bezier(.22, 1, .36, 1), transform .72s cubic-bezier(.22, 1, .36, 1); }
-.fu.on { opacity: 1; transform: translateY(0); }
-.rs>* { opacity: 0; transform: translateY(36px); transition: opacity .65s cubic-bezier(.22, 1, .36, 1), transform .65s cubic-bezier(.22, 1, .36, 1); }
-.rs.on>*:nth-child(1) { opacity: 1; transform: none; transition-delay: .05s }
-.rs.on>*:nth-child(2) { opacity: 1; transform: none; transition-delay: .12s }
-.rs.on>*:nth-child(3) { opacity: 1; transform: none; transition-delay: .19s }
-.rs.on>*:nth-child(4) { opacity: 1; transform: none; transition-delay: .26s }
-.rs.on>*:nth-child(5) { opacity: 1; transform: none; transition-delay: .33s }
-.rs.on>*:nth-child(6) { opacity: 1; transform: none; transition-delay: .40s }
-.rs.on>*:nth-child(7) { opacity: 1; transform: none; transition-delay: .47s }
-.rs.on>*:nth-child(8) { opacity: 1; transform: none; transition-delay: .54s }
-.rs.on>*:nth-child(9) { opacity: 1; transform: none; transition-delay: .61s }
+/* АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ (ИСПРАВЛЕННАЯ) */
+.reveal { opacity: 0; transform: translate3d(0, 36px, 0); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); will-change: opacity, transform; }
+.reveal.on { opacity: 1; transform: translate3d(0, 0, 0); }
 
+/* ПЛАВНАЯ БЕГУЩАЯ СТРОКА */
 .tick-wrap { padding: 30px 0; overflow: hidden; border-top: 1px solid var(--bor); border-bottom: 1px solid var(--bor); position: relative; z-index: 10; background: rgba(0,0,0,0.1); }
 .tick-inner { width: 100%; overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); }
-.tick-track { display: flex; align-items: center; gap: 35px; width: max-content; animation: tk 35s linear infinite; }
-@keyframes tk { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+.tick-track { display: flex; align-items: center; gap: 35px; width: max-content; animation: tk 60s linear infinite; transform: translateZ(0); will-change: transform; }
+@keyframes tk { from { transform: translate3d(0,0,0) } to { transform: translate3d(-50%,0,0) } }
 .tick-item { display: flex; align-items: center; gap: 35px; }
 .tdot { width: 5px; height: 5px; border-radius: 50%; background: var(--y); opacity: 0.6; box-shadow: 0 0 8px var(--y); }
 .tick-logo { width: auto; object-fit: contain; display: block; filter: brightness(0) invert(1) opacity(0.35); transition: filter 0.4s ease, transform 0.4s ease; cursor: pointer; }
@@ -144,14 +123,13 @@ section { position: relative; z-index: 10; }
 .vgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px }
 .hgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 50px }
 
-.wcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); cursor: pointer; transition: transform .38s, box-shadow .38s; position: relative; }
-.wcard:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.025) }
+.wcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); cursor: pointer; transition: transform .38s, box-shadow .38s, opacity 0.7s, transform 0.7s; position: relative; transform: translateZ(0); }
+.wcard:hover { transform: translate3d(0, -5px, 0); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.025) }
 .wi { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100%; transition: all 0.3s ease; }
 .vi .wi { aspect-ratio: 9/16; }
 .hi .wi { aspect-ratio: 16/9; }
 .w-video { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0; background: #000; pointer-events: none; }
 
-/* РАБОТА С ПОЛНОЭКРАННЫМ РЕЖИМОМ */
 .wi:fullscreen { width: 100vw; height: 100vh; background: #000; border-radius: 0; z-index: 9999; }
 .wi:-webkit-full-screen { width: 100vw; height: 100vh; background: #000; border-radius: 0; z-index: 9999; }
 .wi:fullscreen .w-video { object-fit: contain; }
@@ -163,7 +141,6 @@ section { position: relative; z-index: 10; }
 .wi:-webkit-full-screen .fs-enter { display: none; }
 .wi:-webkit-full-screen .fs-exit { display: block !important; }
 
-/* ТАЙМЛАЙН */
 .w-timeline-wrap { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); width: 90%; height: 16px; display: flex; align-items: center; cursor: pointer; z-index: 4; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease, width 0.3s ease; }
 .wi.has-started .w-timeline-wrap { opacity: 1; pointer-events: auto; }
 .w-timeline-bg { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.25); border-radius: 4px; overflow: hidden; backdrop-filter: blur(4px); transition: height 0.2s ease; }
@@ -187,70 +164,20 @@ section { position: relative; z-index: 10; }
 .w-fs-btn:hover { background: rgba(255, 255, 255, 0.25); transform: scale(1.05); border-color: rgba(255, 255, 255, 0.4); }
 .w-fs-btn svg { width: 18px; height: 18px; }
 
-/* === ДИЗАЙН КЕЙСОВ === */
 .rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px }
-.rcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); transition: transform .38s, box-shadow .38s, border-color .38s; display: flex; flex-direction: column; cursor: pointer; }
-.rcard:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border-color: rgba(255, 184, 0, 0.3); }
+.rcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); transition: transform .38s, box-shadow .38s, border-color .38s, opacity 0.7s, transform 0.7s; display: flex; flex-direction: column; cursor: pointer; transform: translateZ(0); }
+.rcard:hover { transform: translate3d(0, -5px, 0); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border-color: rgba(255, 184, 0, 0.3); }
 
-/* ПРОПОРЦИИ КЕЙСОВ */
-.rimg-wrap { 
-    aspect-ratio: 671 / 1035; 
-    width: 100%; 
-    position: relative; 
-    overflow: hidden; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    background: #0a0a0a;
-}
+.rimg-wrap { aspect-ratio: 671 / 1035; width: 100%; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #0a0a0a; }
+.rimg { width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); transition: transform 0.3s ease; }
 
-.rimg { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    transform: scale(1.02); 
-    transition: transform 0.3s ease; 
-}
-
-/* ЗАЩИТА NDA ИЗОБРАЖЕНИЙ */
-.nda-card .rimg {
-    pointer-events: none !important; 
-    user-select: none !important; 
-    -webkit-user-select: none !important;
-    -webkit-user-drag: none !important; 
-    transform: none; /* Убираем зум 1.02 */
-    object-position: center top; /* Поднимаем картинку к верхнему краю, чтобы снизу было место */
-}
-
+.nda-card .rimg { pointer-events: none !important; user-select: none !important; -webkit-user-select: none !important; -webkit-user-drag: none !important; transform: none; object-position: center top; }
 .rtxt-box { padding: 20px 24px; display: flex; flex-direction: column; gap: 6px; background: #080604; flex-grow: 1; justify-content: center; position: relative; z-index: 5; border-top: 1px solid rgba(255,255,255,0.05); }
 .rtxt-main { font-family: 'Involve', sans-serif; font-size: 19px; font-weight: 700; color: var(--y); line-height: 1.1; letter-spacing: -0.02em; }
 .rtxt-sub { font-size: 12.5px; color: rgba(232, 230, 222, 0.6); line-height: 1.4; }
 
-.rblur { 
-    position: absolute; 
-    inset: 0; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 11px; 
-    z-index: 2; 
-    pointer-events: none;
-}
-
-.rblur::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120%;  
-    height: 130px; 
-    background: rgba(30, 30, 30, 0.75); 
-    filter: blur(25px); 
-    z-index: -1; 
-}
-
+.rblur { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 11px; z-index: 2; pointer-events: none; }
+.rblur::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120%; height: 130px; background: rgba(30, 30, 30, 0.75); filter: blur(25px); z-index: -1; }
 .rlock { width: 42px; height: 42px; border-radius: 50%; background: rgba(255, 255, 255, .03); border: 1px solid var(--bor); display: flex; align-items: center; justify-content: center; }
 .rbtxt { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--mu); text-align: center; padding: 0 14px; font-weight: 600; }
 
@@ -268,7 +195,6 @@ section { position: relative; z-index: 10; }
 .chip:hover { border-color: var(--y); color: var(--y) }
 .ab-btns { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 
-/* ВИДЕО-КРУЖОЧКИ */
 .rvid, .rvoice, .rtxts { padding: 40px 0; }
 .rvid { padding-top: 15px; }
 .rgst { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: rgba(255, 255, 255, 0.3); font-weight: 700; margin-bottom: 28px; }
@@ -276,10 +202,10 @@ section { position: relative; z-index: 10; }
 .slider-btn { position: relative; background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; transition: color 0.3s, transform 0.2s; padding: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; outline: none; }
 .slider-btn:hover { color: var(--y); transform: scale(1.1); }
 .vid-track { position: relative; flex: 1; max-width: 820px; height: 440px; display: flex; align-items: center; justify-content: center; }
-.vidcirc { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 16px; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
-.vidcirc.prev { transform: translateX(-280px) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; cursor: pointer; }
-.vidcirc.active { transform: translateX(0) scale(1); opacity: 1; z-index: 3; pointer-events: auto; }
-.vidcirc.next { transform: translateX(280px) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; cursor: pointer; }
+.vidcirc { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 16px; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); transform: translateZ(0); will-change: transform, opacity; }
+.vidcirc.prev { transform: translate3d(-280px, 0, 0) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; cursor: pointer; }
+.vidcirc.active { transform: translate3d(0, 0, 0) scale(1); opacity: 1; z-index: 3; pointer-events: auto; }
+.vidcirc.next { transform: translate3d(280px, 0, 0) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; cursor: pointer; }
 .vidcirc.hidden { opacity: 0; transform: scale(0.5); z-index: 0; pointer-events: none; transition: opacity 0.2s, transform 0s 0.2s; }
 .vc-ring { width: 320px; height: 320px; border-radius: 50%; background: transparent; position: relative; transition: transform 0.3s; }
 .vc-in { width: 100%; height: 100%; border-radius: 50%; background: #1a1a1a; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); transition: border-color 0.3s; }
@@ -292,7 +218,6 @@ section { position: relative; z-index: 10; }
 .vidcirc.active .vc-name { opacity: 0.8; }
 .vidcirc.active:hover .vc-name { opacity: 1; }
 
-/* ГОЛОСОВОЙ ПЛЕЕР */
 .rvoice { padding-top: 0; }
 .vocgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 .voc-wrapper { display: flex; flex-direction: column; gap: 10px; }
@@ -315,6 +240,7 @@ section { position: relative; z-index: 10; }
 
 body.lang-en .ru-only { display: none; }
 
+/* ПЛАВНЫЙ FAQ (ОБНОВЛЕННЫЙ) */
 .flist { margin-top: 50px; display: flex; flex-direction: column; gap: 10px }
 .fi { border: 1px solid var(--bor); border-radius: 13px; overflow: hidden; transition: border-color .28s, box-shadow .28s }
 .fi.open { border-color: rgba(255, 184, 0, 0.5); box-shadow: 0 0 40px rgba(255, 184, 0, 0.1); }
@@ -323,8 +249,11 @@ body.lang-en .ru-only { display: none; }
 .fi.open .fq { background: rgba(255, 184, 0, .03) }
 .fic { display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px; font-weight: 300; color: var(--mu); transition: color .28s, transform .32s }
 .fi.open .fic { color: var(--y); transform: rotate(45deg) }
-.fa { max-height: 0; overflow: hidden; transition: max-height .42s ease, padding .42s ease; padding: 0 26px; font-size: 13.5px; color: var(--mu); line-height: 1.78 }
-.fi.open .fa { max-height: 280px; padding: 0 26px 20px }
+.fa-wrapper { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.7s cubic-bezier(0.33, 1, 0.68, 1); }
+.fa-inner { overflow: hidden; }
+.fa { padding: 0 26px; font-size: 13.5px; color: var(--mu); line-height: 1.78; opacity: 0; transform: translateY(-10px); transition: opacity 0.4s ease, transform 0.6s ease, padding 0.7s cubic-bezier(0.33, 1, 0.68, 1); }
+.fi.open .fa-wrapper { grid-template-rows: 1fr; }
+.fi.open .fa { padding-bottom: 20px; opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
 
 #cta { padding: 110px 0 }
 .ctabox { padding: 76px 56px; text-align: center; position: relative; }
@@ -332,7 +261,6 @@ body.lang-en .ru-only { display: none; }
 .ctasub { font-size: 15.5px; color: var(--mu); margin-bottom: 40px; max-width: 440px; margin-left: auto; margin-right: auto; line-height: 1.72 }
 .ctabtns { display: flex; gap: 11px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
 
-/* МИНИМАЛИСТИЧНЫЙ ФУТЕР */
 footer { position: relative; z-index: 10; }
 .f-container { display: flex; justify-content: center; align-items: center; max-width: 1000px; margin: 0 auto; padding: 20px 40px; text-align: center; }
 .fcopy { color: rgba(255, 255, 255, .5); font-size: 11px; letter-spacing: .1em; font-weight: 500; }
@@ -357,22 +285,10 @@ nav { display: flex; justify-content: space-between; }
 nav { width: calc(100% - 24px); padding: 8px 8px 8px 24px; gap: 8px; height: 56px; border-radius: 100px; }
 nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 
-/* Делаем кнопки одинаковой ширины (по наибольшей) на мобильных */
-.hbtns, .ctabtns, .ab-btns { 
-  flex-direction: column; 
-  align-items: stretch; 
-  width: max-content; 
-  max-width: 100%; 
-  margin-left: auto; 
-  margin-right: auto; 
-  gap: 12px; 
-}
-
-/* Уменьшаем отступы и размер логотипов в бегущей строке на 30% */
+.hbtns, .ctabtns, .ab-btns { flex-direction: column; align-items: stretch; width: max-content; max-width: 100%; margin-left: auto; margin-right: auto; gap: 12px; }
 .tick-track { gap: 20px; }
 .tick-item { gap: 20px; }
 .tick-logo { height: calc(var(--base-h) * 0.7) !important; }
-
 .bpri, .bsec { width: 100%; justify-content: center; font-size: 13.5px; padding: 13px 26px; }
 
 .sp { padding: 60px 0; }
@@ -396,14 +312,13 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 .slider-btn { padding: 10px; z-index: 10; }
 .slider-btn svg { width: 28px; height: 28px; }
 .vid-track { width: 100%; height: 260px; }
-.vidcirc.prev { transform: translateX(-80px) scale(0.55); opacity: 0.25; z-index: 1; }
-.vidcirc.next { transform: translateX(80px) scale(0.55); opacity: 0.25; z-index: 1; }
+.vidcirc.prev { transform: translate3d(-80px,0,0) scale(0.55); opacity: 0.25; z-index: 1; }
+.vidcirc.next { transform: translate3d(80px,0,0) scale(0.55); opacity: 0.25; z-index: 1; }
 .vc-ring { width: 190px; height: 190px; }
 .w-timeline-wrap { height: 20px; } 
 .w-timeline-bg { height: 5px; }
 .f-container { flex-direction: column; gap: 20px; }
 
-/* Уменьшаем кнопки управления на мобильных для вертикальных видео */
 .vi .w-play-btn { width: 48px; height: 48px; }
 .vi .w-play-btn svg { width: 24px; height: 24px; }
 .vi .w-fs-btn { width: 30px; height: 30px; top: 10px; right: 10px; }
@@ -437,7 +352,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 
 <div id="hero-wrap">
 <section id="hero">
-<h1 class="htitle">
+<h1 class="htitle reveal">
 <span class="hsup" data-ru="монтаж • контент • визуал" data-en="editing • content • visuals">монтаж • контент • визуал</span>
 <span class="hhand" data-ru="заставь свои видео" data-en="make your videos">заставь свои видео</span>
 <span class="gw-container">
@@ -446,8 +361,8 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <span class="gw-text" data-ru="СИЯТЬ" data-en="SHINE">СИЯТЬ</span>
 </span>
 </h1>
-<p class="hsub" data-ru="Создаю выдающийся и уникальный визуал, который запоминается и помогает выйти на новый уровень брендам по всему миру" data-en="I create outstanding visuals that are remembered and help brands worldwide reach a new level">Создаю выдающийся и уникальный визуал, который запоминается и помогает выйти на новый уровень брендам по всему миру</p>
-<div class="hbtns">
+<p class="hsub reveal" data-ru="Создаю выдающийся и уникальный визуал, который запоминается и помогает выйти на новый уровень брендам по всему миру" data-en="I create outstanding visuals that are remembered and help brands worldwide reach a new level">Создаю выдающийся и уникальный визуал, который запоминается и помогает выйти на новый уровень брендам по всему миру</p>
+<div class="hbtns reveal">
 <a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="bpri">
 <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" /></svg>
 <span data-ru="Написать в Telegram" data-en="Message on Telegram">Написать в Telegram</span>
@@ -463,7 +378,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 </section>
 </div>
 
-<div class="tick-wrap fu">
+<div class="tick-wrap reveal">
 <div class="tick-inner"><div class="tick-track" id="tt"></div></div>
 </div>
 
@@ -471,21 +386,21 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 
 <section id="works" style="padding: 100px 0 50px; position:relative; z-index:10">
 <div class="cnt">
-<div class="ft">
+<div class="reveal">
 <div class="slbl" data-ru="Портфолио" data-en="Portfolio">Портфолио</div>
 <h2 class="stitle" data-ru="Вертикальные работы" data-en="Vertical projects">Вертикальные работы</h2>
 </div>
-<div class="vgrid rs" id="vg"></div>
+<div class="vgrid" id="vg"></div>
 </div>
 </section>
 
 <section style="padding: 50px 0 100px; position:relative; z-index:10">
 <div class="cnt">
-<div class="ft">
+<div class="reveal">
 <div class="slbl" data-ru="Портфолио" data-en="Portfolio">Портфолио</div>
 <h2 class="stitle" data-ru="Горизонтальные работы" data-en="Horizontal projects">Горизонтальные работы</h2>
 </div>
-<div class="hgrid rs" id="hg"></div>
+<div class="hgrid" id="hg"></div>
 </div>
 </section>
 
@@ -493,11 +408,11 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 
 <section id="results" class="sp">
 <div class="cnt">
-<div class="ft">
+<div class="reveal">
 <div class="slbl" data-ru="Кейсы" data-en="Results">Кейсы</div>
 <h2 class="stitle" data-ru="Результаты клиентов" data-en="Client results">Результаты клиентов</h2>
 </div>
-<div class="rgrid rs" id="rg"></div>
+<div class="rgrid" id="rg"></div>
 </div>
 </section>
 
@@ -506,13 +421,13 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <section id="about" class="sp">
 <div class="cnt">
 <div class="agrid">
-<div class="aphoto fu">
+<div class="aphoto reveal">
 <div class="aframe">
 <img src="assets/images/photo_desktop.webp" alt="Илья — KLAGE" class="photo-desktop" width="800" height="960" loading="lazy">
 <img src="assets/images/photo_mobile.webp" alt="Илья — KLAGE" class="photo-mobile" width="600" height="800" loading="lazy">
 </div>
 </div>
-<div class="atxt ft">
+<div class="atxt reveal">
 <div class="slbl" data-ru="Обо мне" data-en="About Me">Обо мне</div>
 <p data-ru="Привет, я Илья" data-en="Hi, I'm Ilya">Привет, я Илья</p>
 <p data-ru="Создаю уникальные, структурированные видео, где каждая деталь работает на цель. Работаю с ритмом, чистотой и смыслом кадра, чтобы видео не просто смотрели, а чувствовали и запоминали." data-en="I create unique, structured videos where every detail works towards the goal. I work with rhythm, clarity, and the meaning of the frame so that videos are not just watched, but felt and remembered.">Создаю уникальные, структурированные видео, где каждая деталь работает на цель. Работаю с ритмом, чистотой и смыслом кадра, чтобы видео не просто смотрели, а чувствовали и запоминали.</p>
@@ -537,11 +452,11 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 
 <section id="reviews" class="sp">
 <div class="cnt">
-<div class="ft">
+<div class="reveal">
 <div class="slbl" data-ru="Отзывы" data-en="Reviews">Отзывы</div>
 <h2 class="stitle" data-ru="Что говорят клиенты" data-en="What clients say">Что говорят клиенты</h2>
 </div>
-<div class="rbox fu">
+<div class="rbox reveal">
 <div class="rvid ru-only">
 <div class="rgst">Видеоотзывы</div>
 <div class="vid-slider-wrap">
@@ -615,7 +530,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="voc-wrapper">
   <div class="voccard" onclick="toggleVoice(this, event)">
     <audio src="assets/audio/voice1.mp3" preload="none" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
-    <button class="vocplay" aria-label="Воспроизвести отзыв"><svg viewBox="0 0 24 24" fiwll="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
+    <button class="vocplay" aria-label="Воспроизвести отзыв"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     <div class="vocwave-box" onclick="seekVoice(event, this)"><div class="vocwave-bg"></div><div class="vocwave-fill"></div></div>
     <div class="voc-dur">0:00</div>
   </div>
@@ -674,11 +589,11 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 
 <section id="faq" class="sp">
 <div class="cnt">
-<div class="ft">
+<div class="reveal">
 <div class="slbl">FAQ</div>
 <h2 class="stitle" data-ru="Частые вопросы" data-en="Frequently Asked Questions">Частые вопросы</h2>
 </div>
-<div class="flist fu" id="fl"></div>
+<div class="flist reveal" id="fl"></div>
 </div>
 </section>
 
@@ -686,7 +601,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 
 <section id="cta">
 <div class="cnt">
-<div class="ctabox fu">
+<div class="ctabox reveal">
 <div class="slbl" data-ru="Начнём?" data-en="Let's start?">Начнём?</div>
 <h2 class="ctatitle" data-ru="Готов вывести свой контент на новый уровень?" data-en="Ready to take your content to the next level?">Готов вывести свой контент на новый уровень?</h2>
 <div class="ctabtns">
@@ -733,48 +648,12 @@ const HW = [
 ];
 
 const RS = [
-  { 
-    type: 'blur', 
-    img: 'assets/images/nda1.webp', 
-    main: '570K', 
-    sub: 'Просмотров для<br>крупного автора',
-    subEn: 'Views for a<br>large creator' 
-  },
-  { 
-    type: 'blur', 
-    img: 'assets/images/nda2.webp', 
-    main: '177K', 
-    sub: 'Просмотров для<br>крупного автора',
-    subEn: 'Engagement growth<br>in 2 weeks' 
-  },
-  { 
-    type: 'blur', 
-    img: 'assets/images/nda3.webp', 
-    main: '276K', 
-    sub: 'Просмотров для<br>крупного автора',
-    subEn: 'Likes under one<br>client Reels' 
-  },
-  { 
-    type: 'open', 
-    img: 'assets/images/case1.webp', 
-    main: '278K', 
-    sub: 'Просмотров при 2400<br>подписчиках', 
-    subEn: 'Views with 2400<br>followers' 
-  },
-{ 
-    type: 'open', 
-    img: 'assets/images/case2.webp', 
-    main: '218K', 
-    sub: 'Просмотров, видео принесло<br>автору <span style="color: var(--y);">+600</span> подписчиков', 
-    subEn: 'Views, the video brought<br>the author <span style="color: var(--y);">+600</span> followers' 
-  },
-  { 
-    type: 'open', 
-    img: 'assets/images/case3.webp', 
-    main: '82K', 
-    sub: 'Просмотров при 850<br>подписчиках', 
-    subEn: 'Views with 850<br>followers' 
-  }
+  { type: 'blur', img: 'assets/images/nda1.webp', main: '570K', sub: 'Просмотров для<br>крупного автора', subEn: 'Views for a<br>large creator' },
+  { type: 'blur', img: 'assets/images/nda2.webp', main: '177K', sub: 'Просмотров для<br>крупного автора', subEn: 'Engagement growth<br>in 2 weeks' },
+  { type: 'blur', img: 'assets/images/nda3.webp', main: '276K', sub: 'Просмотров для<br>крупного автора', subEn: 'Likes under one<br>client Reels' },
+  { type: 'open', img: 'assets/images/case1.webp', main: '278K', sub: 'Просмотров при 2400<br>подписчиках', subEn: 'Views with 2400<br>followers' },
+  { type: 'open', img: 'assets/images/case2.webp', main: '218K', sub: 'Просмотров, видео принесло<br>автору <span style="color: var(--y);">+600</span> подписчиков', subEn: 'Views, the video brought<br>the author <span style="color: var(--y);">+600</span> followers' },
+  { type: 'open', img: 'assets/images/case3.webp', main: '82K', sub: 'Просмотров при 850<br>подписчиках', subEn: 'Views with 850<br>followers' }
 ];
 
 const FAQ = [
@@ -787,12 +666,14 @@ const FAQ = [
 let lang = 'ru';
 
 function buildTicker() {
-const track = [...LOGOS, ...LOGOS];
-const baseHeight = 28;
-document.getElementById('tt').innerHTML = track.map(logo => {
-const newHeight = (baseHeight * (logo.size || 100)) / 100;
-return `<div class="tick-item"><img src="${logo.src}" alt="${logo.alt}" class="tick-logo" width="150" height="${newHeight}" loading="lazy" decoding="async" style="--base-h: ${newHeight}px; height: var(--base-h);"><span class="tdot"></span></div>`;
-}).join('');
+    let track = [];
+    // Копируем логотипы 10 раз, чтобы их всегда хватало на самых широких экранах
+    for(let i=0; i<10; i++){ track = track.concat(LOGOS); }
+    const baseHeight = 28;
+    document.getElementById('tt').innerHTML = track.map(logo => {
+        const newHeight = (baseHeight * (logo.size || 100)) / 100;
+        return `<div class="tick-item"><img src="${logo.src}" alt="${logo.alt}" class="tick-logo" width="150" height="${newHeight}" decoding="async" style="--base-h: ${newHeight}px; height: var(--base-h);"><span class="tdot"></span></div>`;
+    }).join('');
 }
 
 function resetIdleTimer(container) {
@@ -875,28 +756,21 @@ function toggleFullScreen(btn, event) {
     event.stopPropagation();
     const card = btn.closest('.wi');
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        if (card.requestFullscreen) {
-            card.requestFullscreen();
-        } else if (card.webkitRequestFullscreen) {
-            card.webkitRequestFullscreen();
-        } else if (card.msRequestFullscreen) {
-            card.msRequestFullscreen();
-        }
+        if (card.requestFullscreen) { card.requestFullscreen(); } 
+        else if (card.webkitRequestFullscreen) { card.webkitRequestFullscreen(); } 
+        else if (card.msRequestFullscreen) { card.msRequestFullscreen(); }
     } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-        }
+        if (document.exitFullscreen) { document.exitFullscreen(); } 
+        else if (document.webkitExitFullscreen) { document.webkitExitFullscreen(); } 
+        else if (document.msExitFullscreen) { document.msExitFullscreen(); }
     }
 }
 
+// Теперь карточки появляются по отдельности (класс reveal)
 function wCard(w, cls) {
 const timelineHTML = `<div class="w-timeline-wrap" onclick="seekVideo(event, this)"><div class="w-timeline-bg"><div class="w-timeline-fill"></div></div></div>`;
 return `
-<div class="${cls} wcard">
+<div class="${cls} wcard reveal">
 <div class="wi" onclick="togglePlayAction(this)" onmousemove="resetIdleTimer(this)" ontouchstart="resetIdleTimer(this)" onmouseleave="hideUIFast(this)">
 <video class="w-video" src="${w.v}" poster="${w.p}" playsinline preload="none" onended="onVideoEnded(this)" ontimeupdate="updateTimeline(this)"></video>
 <button class="w-play-btn" aria-label="Смотреть/Пауза"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
@@ -912,16 +786,15 @@ ${timelineHTML}
 function buildWorks() {
 document.getElementById('vg').innerHTML = VW.map(w => wCard(w, 'vi')).join('');
 document.getElementById('hg').innerHTML = HW.map(w => wCard(w, 'hi')).join('');
+observeNewElements();
 }
 
 function buildResults() {
     const copyTxt = lang === 'ru' ? 'Проект под защитой<br>авторских прав' : 'Project protected<br>by copyright';
     document.getElementById('rg').innerHTML = RS.map(r => {
         const subtext = lang === 'ru' ? r.sub : (r.subEn || r.sub);
-        
         const isBlur = r.type === 'blur';
-        const cardClass = isBlur ? 'rcard nda-card' : 'rcard';
-        
+        const cardClass = isBlur ? 'rcard nda-card reveal' : 'rcard reveal';
         const imagePart = isBlur ? `
             <img src="${r.img}" class="rimg" loading="lazy" alt="Кейс NDA" draggable="false" width="671" height="1035">
             <div class="rblur">
@@ -929,27 +802,43 @@ function buildResults() {
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                 </div>
                 <div class="rbtxt" style="line-height: 1.4; margin-top: 8px;">${copyTxt}</div>
-            </div>` : 
-            `<img src="${r.img}" class="rimg" loading="lazy" alt="Кейс" width="671" height="1035">`;
-        
+            </div>` : `<img src="${r.img}" class="rimg" loading="lazy" alt="Кейс" width="671" height="1035">`;
         const wrapAttrs = isBlur ? 'oncontextmenu="return false;" draggable="false"' : '';
 
         return `
         <div class="${cardClass}">
-            <div class="rimg-wrap" ${wrapAttrs}>
-                ${imagePart}
-            </div>
+            <div class="rimg-wrap" ${wrapAttrs}>${imagePart}</div>
             <div class="rtxt-box">
                 <div class="rtxt-main">${r.main}</div>
                 <div class="rtxt-sub">${subtext}</div>
             </div>
         </div>`;
     }).join('');
+    observeNewElements();
 }
 
-function buildFAQ() { document.getElementById('fl').innerHTML = FAQ.map((f, i) => `<div class="fi" id="f${i}"><div class="fq" onclick="tf(${i})"><span>${f.q[lang]}</span><div class="fic">+</div></div><div class="fa">${f.a[lang]}</div></div>`).join('') }
+function buildFAQ() { 
+    document.getElementById('fl').innerHTML = FAQ.map((f, i) => `
+        <div class="fi" id="f${i}">
+            <div class="fq" onclick="tf(${i})">
+                <span>${f.q[lang]}</span>
+                <div class="fic">+</div>
+            </div>
+            <div class="fa-wrapper">
+                <div class="fa-inner">
+                    <div class="fa">${f.a[lang]}</div>
+                </div>
+            </div>
+        </div>
+    `).join(''); 
+}
 
-function tf(i) { const e = document.getElementById('f' + i); const was = e.classList.contains('open'); document.querySelectorAll('.fi').forEach(x => x.classList.remove('open')); if (!was) e.classList.add('open') }
+function tf(i) { 
+    const e = document.getElementById('f' + i); 
+    const was = e.classList.contains('open'); 
+    document.querySelectorAll('.fi').forEach(x => x.classList.remove('open')); 
+    if (!was) e.classList.add('open'); 
+}
 
 function tl() {
 lang = lang === 'ru' ? 'en' : 'ru';
@@ -1059,7 +948,6 @@ function resetVoice(audio) {
     const btn = card.querySelector('.vocplay');
     const fill = card.querySelector('.vocwave-fill');
     const durEl = card.querySelector('.voc-dur');
-    
     btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
     fill.style.width = '0%';
     durEl.textContent = formatTime(audio.duration);
@@ -1094,11 +982,9 @@ function seekVoice(event, box) {
     const card = box.parentElement;
     const audio = card.querySelector('audio');
     if (!audio.duration) return;
-    
     const rect = box.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
     const percentage = Math.max(0, Math.min(1, clickX / rect.width));
-    
     audio.currentTime = percentage * audio.duration;
 }
 
@@ -1110,31 +996,59 @@ ids.forEach(id => { const el = document.getElementById(id); if (!el) return; con
 document.querySelectorAll('.nl').forEach(a => a.classList.toggle('active', a.dataset.s === act));
 }, { passive: true });
 
+// Наблюдатель за появлением элементов по отдельности (теперь каждая карточка появляется плавно)
 const obs = new IntersectionObserver(entries => {
 entries.forEach(e => {
-if (e.isIntersecting) { e.target.classList.add('on'); } else if (e.boundingClientRect.top > window.innerHeight * 0.4) { e.target.classList.remove('on'); }
+if (e.isIntersecting) { e.target.classList.add('on'); } 
+else if (e.boundingClientRect.top > window.innerHeight * 0.2) { e.target.classList.remove('on'); }
 });
-}, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+}, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
 
-setTimeout(() => { document.querySelectorAll('.rv,.fu,.ft,.rs').forEach(el => obs.observe(el)); }, 100);
+function observeNewElements() {
+    document.querySelectorAll('.reveal:not(.observed)').forEach(el => {
+        el.classList.add('observed');
+        obs.observe(el);
+    });
+}
 
 document.querySelectorAll('a[href^="#"]').forEach(a => {
 a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }) });
 });
 
+// Шум на Canvas с частотой 13 кадров в секунду (Не лагает)
 (function () {
-const cv = document.getElementById('noise'); const ctx = cv.getContext('2d');
-const nw = 128, nh = 128; const oc = document.createElement('canvas'); oc.width = nw; oc.height = nh; const octx = oc.getContext('2d');
-let w, h;
-function resize() { w = cv.width = window.innerWidth; h = cv.height = window.innerHeight; }
-resize(); window.addEventListener('resize', resize, { passive: true });
-function tick() {
-    const id = octx.createImageData(nw, nh); const d = id.data;
-    for (let i = 0; i < d.length; i += 4) { const val = Math.random() > 0.5 ? 255 : 0; d[i] = val; d[i+1] = val; d[i+2] = val; d[i+3] = 255; }
-    octx.putImageData(id, 0, 0); ctx.clearRect(0, 0, w, h); ctx.fillStyle = ctx.createPattern(oc, 'repeat'); ctx.fillRect(0, 0, w, h);
+    const cv = document.getElementById('noise');
+    if(!cv) return;
+    const ctx = cv.getContext('2d', { alpha: true });
+    const nw = 128, nh = 128;
+    const oc = document.createElement('canvas');
+    oc.width = nw; oc.height = nh;
+    const octx = oc.getContext('2d', { alpha: false });
+    let w, h;
+    function resize() { w = cv.width = window.innerWidth; h = cv.height = window.innerHeight; }
+    resize(); window.addEventListener('resize', resize, { passive: true });
+    
+    let lastTime = 0;
+    const fpsInterval = 1000 / 13; // 13 FPS
+    
+    function tick(now) {
+        requestAnimationFrame(tick);
+        const elapsed = now - lastTime;
+        if (elapsed > fpsInterval) {
+            lastTime = now - (elapsed % fpsInterval);
+            const id = octx.createImageData(nw, nh);
+            const d = id.data;
+            for (let i = 0; i < d.length; i += 4) {
+                const val = Math.random() > 0.5 ? 255 : 0;
+                d[i] = val; d[i+1] = val; d[i+2] = val; d[i+3] = 255;
+            }
+            octx.putImageData(id, 0, 0);
+            ctx.clearRect(0, 0, w, h);
+            ctx.fillStyle = ctx.createPattern(oc, 'repeat');
+            ctx.fillRect(0, 0, w, h);
+        }
+    }
     requestAnimationFrame(tick);
-}
-requestAnimationFrame(tick);
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1142,6 +1056,7 @@ document.addEventListener('DOMContentLoaded', () => {
     buildWorks(); 
     buildResults(); 
     buildFAQ();
+    observeNewElements();
 });
 
 </script>

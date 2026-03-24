@@ -475,8 +475,8 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="agrid">
 <div class="aphoto fu">
 <div class="aframe">
-<img src="assets/images/photo_desktop.png" alt="Илья — KLAGE" class="photo-desktop" width="800" height="960">
-<img src="assets/images/photo_mobile.jpg" alt="Илья — KLAGE" class="photo-mobile" width="600" height="800">
+<img src="assets/images/photo_desktop.webp" alt="Илья — KLAGE" class="photo-desktop" width="800" height="960">
+<img src="assets/images/photo_mobile.webp" alt="Илья — KLAGE" class="photo-mobile" width="600" height="800">
 </div>
 </div>
 <div class="atxt ft">
@@ -551,6 +551,24 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
     </div>
   </div>
   <div class="vc-name">Александр</div>
+</div>
+<div class="vidcirc" data-index="4">
+  <div class="vc-ring">
+    <div class="vc-in" onclick="toggleCircleVideo(this)">
+      <video src="assets/rev/rev5.mp4" loop playsinline preload="metadata"></video>
+      <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
+    </div>
+  </div>
+  <div class="vc-name">Клиент</div>
+</div>
+<div class="vidcirc" data-index="5">
+  <div class="vc-ring">
+    <div class="vc-in" onclick="toggleCircleVideo(this)">
+      <video src="assets/rev/rev6.mp4" loop playsinline preload="metadata"></video>
+      <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
+    </div>
+  </div>
+  <div class="vc-name">Клиент</div>
 </div>
 </div>
 <button class="slider-btn" id="nextBtn" aria-label="Следующее видео">
@@ -667,60 +685,60 @@ const LOGOS = [
 ];
 
 const VW = [
-{ l: 'Reels · SMM', t: 'Probazis', v: 'assets/videos_v/v1.mp4', p: 'assets/covers_h/cover1.png' },
-{ l: 'Shorts · Спорт', t: 'FSCR', v: 'assets/videos_v/v2.mp4', p: 'assets/covers_h/cover4.png' },
-{ l: 'Reels · Бизнес', t: 'Remstart', v: 'assets/videos_v/v3.mp4', p: 'assets/covers_h/cover3.png' },
-{ l: 'Reels · Недвижимость', t: 'fullflat', v: 'assets/videos_v/v4.mp4', p: 'assets/covers_h/cover2.png' },
-{ l: 'Shorts · Продукт', t: 'Nutreasy', v: 'assets/videos_v/v5.mp4', p: 'assets/covers_h/cover6.png' },
-{ l: 'Reels · Медиа', t: 'Region Online', v: 'assets/videos_v/v6.mp4', p: 'assets/covers_h/cover5.png' }
+{ l: 'Reels · SMM', t: 'Probazis', v: 'assets/video_v/v1.mp4', p: 'assets/covers_h/cover1.webp' },
+{ l: 'Shorts · Спорт', t: 'FSCR', v: 'assets/video_v/v2.mp4', p: 'assets/covers_h/cover4.webp' },
+{ l: 'Reels · Бизнес', t: 'Remstart', v: 'assets/video_v/v3.mp4', p: 'assets/covers_h/cover3.webp' },
+{ l: 'Reels · Недвижимость', t: 'fullflat', v: 'assets/video_v/v4.mp4', p: 'assets/covers_h/cover2.webp' },
+{ l: 'Shorts · Продукт', t: 'Nutreasy', v: 'assets/video_v/v5.mp4', p: 'assets/covers_h/cover6.webp' },
+{ l: 'Reels · Медиа', t: 'Region Online', v: 'assets/video_v/v6.mp4', p: 'assets/covers_h/cover5.webp' }
 ];
 
 const HW = [
-{ l: 'YouTube · Обзор', t: 'Probazis', v: 'assets/videos_h/h1.mp4', p: 'assets/covers_v/cover1.png' },
-{ l: 'YouTube · Travel', t: 'ПОЗДРАВЛЕНИЕ ИЗ АФРИКИ', v: 'assets/videos_h/h2.mp4', p: 'assets/covers_v/cover2.png' },
-{ l: 'Highlight · Реклама', t: 'Шкафы Нарния', v: 'assets/videos_h/h3.mp4', p: 'assets/covers_v/cover3.png' },
-{ l: 'Corporate · Корпоратив', t: 'Remstart', v: 'assets/videos_h/h4.mp4', p: 'assets/covers_v/cover4.png' }
+{ l: 'YouTube · Обзор', t: 'Probazis', v: 'assets/video_h/h1.mp4', p: 'assets/covers_v/cover1.webp' },
+{ l: 'YouTube · Travel', t: 'ПОЗДРАВЛЕНИЕ ИЗ АФРИКИ', v: 'assets/video_h/h2.mp4', p: 'assets/covers_v/cover2.webp' },
+{ l: 'Highlight · Реклама', t: 'Шкафы Нарния', v: 'assets/video_h/h3.mp4', p: 'assets/covers_v/cover3.webp' },
+{ l: 'Corporate · Корпоратив', t: 'Remstart', v: 'assets/video_h/h4.mp4', p: 'assets/covers_v/cover4.webp' }
 ];
 
 const RS = [
   { 
     type: 'blur', 
-    img: 'assets/images/nda1.png', 
+    img: 'assets/images/nda1.webp', 
     main: '570K', 
     sub: 'Просмотров для<br>крупного автора',
     subEn: 'Views for a<br>large creator' 
   },
   { 
     type: 'blur', 
-    img: 'assets/images/nda2.png', 
+    img: 'assets/images/nda2.webp', 
     main: '177K', 
     sub: 'Просмотров для<br>крупного автора',
     subEn: 'Engagement growth<br>in 2 weeks' 
   },
   { 
     type: 'blur', 
-    img: 'assets/images/nda3.png', 
+    img: 'assets/images/nda3.webp', 
     main: '276K', 
     sub: 'Просмотров для<br>крупного автора',
     subEn: 'Likes under one<br>client Reels' 
   },
   { 
     type: 'open', 
-    img: 'assets/images/case1.png', 
+    img: 'assets/images/case1.webp', 
     main: '278K', 
     sub: 'Просмотров при 2400<br>подписчиках', 
     subEn: 'Views with 2400<br>followers' 
   },
 { 
     type: 'open', 
-    img: 'assets/images/case2.png', 
+    img: 'assets/images/case2.webp', 
     main: '218K', 
     sub: 'Просмотров, видео принесло<br>автору <span style="color: var(--y);">+600</span> подписчиков', 
     subEn: 'Views, the video brought<br>the author <span style="color: var(--y);">+600</span> followers' 
   },
   { 
     type: 'open', 
-    img: 'assets/images/case3.png', 
+    img: 'assets/images/case3.webp', 
     main: '82K', 
     sub: 'Просмотров при 850<br>подписчиках', 
     subEn: 'Views with 850<br>followers' 
@@ -741,7 +759,7 @@ const track = [...LOGOS, ...LOGOS];
 const baseHeight = 28;
 document.getElementById('tt').innerHTML = track.map(logo => {
 const newHeight = (baseHeight * (logo.size || 100)) / 100;
-return `<div class="tick-item"><img src="${logo.src}" alt="${logo.alt}" class="tick-logo" width="150" height="${newHeight}" decoding="async" style="height: ${newHeight}px;"><span class="tdot"></span></div>`;
+return `<div class="tick-item"><img src="${logo.src}" alt="${logo.alt}" class="tick-logo" width="150" height="${newHeight}" loading="lazy" decoding="async" style="height: ${newHeight}px;"><span class="tdot"></span></div>`;
 }).join('');
 }
 

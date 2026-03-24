@@ -7,12 +7,13 @@
 <title>KLAGE | PORTFOLIO</title>
 
 <!-- Оптимизированная загрузка шрифтов -->
+<link rel="preload" href="assets/fonts/Involve.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;600;800&family=Montserrat:wght@300;600&display=swap">
-<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;600;800&family=Montserrat:wght@300;600&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@300&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@300&display=swap">
 <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;600;800&family=Montserrat:wght@300;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@300&display=swap">
 </noscript>
 
 <style>
@@ -475,8 +476,8 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="agrid">
 <div class="aphoto fu">
 <div class="aframe">
-<img src="assets/images/photo_desktop.webp" alt="Илья — KLAGE" class="photo-desktop" width="800" height="960">
-<img src="assets/images/photo_mobile.webp" alt="Илья — KLAGE" class="photo-mobile" width="600" height="800">
+<img src="assets/images/photo_desktop.webp" alt="Илья — KLAGE" class="photo-desktop" width="800" height="960" loading="lazy">
+<img src="assets/images/photo_mobile.webp" alt="Илья — KLAGE" class="photo-mobile" width="600" height="800" loading="lazy">
 </div>
 </div>
 <div class="atxt ft">
@@ -581,7 +582,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="vocgrid">
 <div class="voc-wrapper">
   <div class="voccard" onclick="toggleVoice(this, event)">
-    <audio src="assets/audio/voice1.mp3" preload="metadata" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
+    <audio src="assets/audio/voice1.mp3" preload="none" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
     <button class="vocplay" aria-label="Воспроизвести отзыв"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     <div class="vocwave-box" onclick="seekVoice(event, this)"><div class="vocwave-bg"></div><div class="vocwave-fill"></div></div>
     <div class="voc-dur">0:00</div>
@@ -590,7 +591,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 </div>
 <div class="voc-wrapper">
   <div class="voccard" onclick="toggleVoice(this, event)">
-    <audio src="assets/audio/voice2.mp3" preload="metadata" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
+    <audio src="assets/audio/voice2.mp3" preload="none" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
     <button class="vocplay" aria-label="Воспроизвести отзыв"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     <div class="vocwave-box" onclick="seekVoice(event, this)"><div class="vocwave-bg"></div><div class="vocwave-fill"></div></div>
     <div class="voc-dur">0:00</div>
@@ -599,7 +600,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 </div>
 <div class="voc-wrapper">
   <div class="voccard" onclick="toggleVoice(this, event)">
-    <audio src="assets/audio/voice3.mp3" preload="metadata" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
+    <audio src="assets/audio/voice3.mp3" preload="none" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
     <button class="vocplay" aria-label="Воспроизвести отзыв"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     <div class="vocwave-box" onclick="seekVoice(event, this)"><div class="vocwave-bg"></div><div class="vocwave-fill"></div></div>
     <div class="voc-dur">0:00</div>
@@ -866,7 +867,7 @@ const timelineHTML = `<div class="w-timeline-wrap" onclick="seekVideo(event, thi
 return `
 <div class="${cls} wcard">
 <div class="wi" onclick="togglePlayAction(this)" onmousemove="resetIdleTimer(this)" ontouchstart="resetIdleTimer(this)" onmouseleave="hideUIFast(this)">
-<video class="w-video" src="${w.v}" poster="${w.p}" playsinline preload="metadata" onended="onVideoEnded(this)" ontimeupdate="updateTimeline(this)"></video>
+<video class="w-video" src="${w.v}" poster="${w.p}" playsinline preload="none" onended="onVideoEnded(this)" ontimeupdate="updateTimeline(this)"></video>
 <button class="w-play-btn" aria-label="Смотреть/Пауза"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
 <button class="w-fs-btn" onclick="toggleFullScreen(this, event)" aria-label="На весь экран">
 <svg class="fs-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
@@ -1097,12 +1098,12 @@ let w, h;
 function resize() { w = cv.width = window.innerWidth; h = cv.height = window.innerHeight; }
 resize(); window.addEventListener('resize', resize, { passive: true });
 function tick() {
-const id = octx.createImageData(nw, nh); const d = id.data;
-for (let i = 0; i < d.length; i += 4) { const val = Math.random() > 0.5 ? 255 : 0; d[i] = val; d[i+1] = val; d[i+2] = val; d[i+3] = 255; }
-octx.putImageData(id, 0, 0); ctx.clearRect(0, 0, w, h); ctx.fillStyle = ctx.createPattern(oc, 'repeat'); ctx.fillRect(0, 0, w, h);
-setTimeout(tick, 50);
+    const id = octx.createImageData(nw, nh); const d = id.data;
+    for (let i = 0; i < d.length; i += 4) { const val = Math.random() > 0.5 ? 255 : 0; d[i] = val; d[i+1] = val; d[i+2] = val; d[i+3] = 255; }
+    octx.putImageData(id, 0, 0); ctx.clearRect(0, 0, w, h); ctx.fillStyle = ctx.createPattern(oc, 'repeat'); ctx.fillRect(0, 0, w, h);
+    requestAnimationFrame(tick);
 }
-tick();
+requestAnimationFrame(tick);
 })();
 
 document.addEventListener('DOMContentLoaded', () => {

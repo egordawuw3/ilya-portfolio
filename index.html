@@ -90,7 +90,7 @@ body { background: #030100; color: var(--tx); font-family: 'Inter', sans-serif; 
 @keyframes navDrop { from { opacity: 0; transform: translate3d(-50%, -20px, 0); } to { opacity: 1; transform: translate3d(-50%, 0, 0); } }
 
 nav { position: fixed; top: max(18px, env(safe-area-inset-top, 18px)); left: 50%; transform: translateX(-50%); z-index: 600; width: 100%; max-width: 1000px; height: 64px; padding: 0 16px 0 34px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; transition: all .6s cubic-bezier(0.22, 1, 0.36, 1), border-color .4s ease, background .4s ease, box-shadow .4s ease; white-space: nowrap; opacity: 0; -webkit-animation: navDrop 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; animation: navDrop 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; box-sizing: border-box; border-radius: 100px; border: 1px solid transparent; background: transparent; }
-nav.sc { max-width: 680px; height: 56px; padding: 0 16px 0 24px; background: rgba(8, 6, 4, .65); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-color: rgba(255, 255, 255, .08); box-shadow: 0 4px 40px rgba(0, 0, 0, .5); }
+nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; background: rgba(8, 6, 4, .65); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-color: rgba(255, 255, 255, .08); box-shadow: 0 4px 40px rgba(0, 0, 0, .5); }
 
 .nlogo { justify-self: start; display: flex; align-items: center; justify-content: center; line-height: 1; font-family: 'Involve', sans-serif; font-weight: 700; font-size: 7.6px; letter-spacing: 1.3em; margin-right: -1.3em; text-decoration: none; background: linear-gradient(to bottom, #ffffff 0%, #777777 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding: 0; }
 .nlinks { justify-self: center; display: flex; gap: 4px; }
@@ -98,7 +98,7 @@ nav.sc { max-width: 680px; height: 56px; padding: 0 16px 0 24px; background: rgb
 .nlinks a:hover, .nlinks a.active { color: #fff; }
 .nright { justify-self: end; display: flex; align-items: center; gap: 9px; height: 100%; flex-shrink: 0; }
 
-.ncta { display: inline-flex; align-items: center; justify-content: center; height: 32px; background: var(--y); color: #000; font-size: 11.5px; font-weight: 700; letter-spacing: .05em; padding: 0 17px; border-radius: 100px; text-decoration: none; transition: transform .22s, box-shadow .22s }
+.ncta { display: inline-flex; align-items: center; justify-content: center; height: 32px; background: var(--y); color: #000; font-size: 11.5px; font-weight: 700; letter-spacing: .05em; padding: 0 17px; border-radius: 100px; text-decoration: none; transition: transform .22s, box-shadow .22s; margin-right: 4px; }
 .ncta:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--yg) }
 .lbtn { display: inline-flex; align-items: center; justify-content: center; height: 32px; background: none; border: 1px solid rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .4); font-size: 10.5px; font-weight: 700; padding: 0 11px; border-radius: 100px; cursor: pointer; letter-spacing: .1em; transition: color .25s, border-color .25s; }
 .lbtn:hover { color: #fff; border-color: rgba(255, 255, 255, .35); }
@@ -109,7 +109,7 @@ nav.sc { max-width: 680px; height: 56px; padding: 0 16px 0 24px; background: rgb
 .hhand { font-family: 'Manrope', sans-serif; font-size: clamp(20px, 3.5vw, 36px); font-weight: 300; letter-spacing: 0.03em; text-transform: none; color: #fff; margin: 0; position: relative; z-index: 2; line-height: 1; }
 
 .gw-container { position: relative; display: inline-grid; place-items: center; transform: translateZ(0); }
-.gw-blur, .gw-sharp, .gw-text { grid-area: 1 / 1; font-family: 'Involve', sans-serif; font-size: clamp(48px, 11vw, 130px); font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1; }
+.gw-blur, .gw-sharp, .gw-text { grid-area: 1 / 1; font-family: 'Involve', sans-serif; font-size: clamp(48px, 11vw, 130px); font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.1; padding: 0 0.05em; }
 
 .gw-blur { 
     color: #fff; filter: blur(6px); -webkit-user-select: none; -moz-user-select: none; user-select: none; pointer-events: none; 
@@ -178,7 +178,6 @@ section { position: relative; z-index: 10; }
 .wi:-webkit-full-screen { width: 100vw; height: 100vh; background: #000; border-radius: 0; z-index: 9999; }
 .wi:fullscreen .w-video { -o-object-fit: contain; object-fit: contain; }
 .wi:-webkit-full-screen .w-video { object-fit: contain; }
-.wi:fullscreen .w-video, .wi:-webkit-full-screen .w-video { pointer-events: auto; }
 .wi.ui-hidden { cursor: none; }
 .wi.ui-hidden .w-play-btn, .wi.ui-hidden .w-fs-btn, .wi.ui-hidden .w-timeline-wrap { opacity: 0 !important; pointer-events: none !important; transition: opacity 0.2s ease; }
 .wi:fullscreen .fs-enter { display: none; }
@@ -192,9 +191,14 @@ section { position: relative; z-index: 10; }
 .w-timeline-wrap:hover .w-timeline-bg { height: 6px; }
 .w-timeline-fill { height: 100%; width: 0%; background: var(--y); border-radius: 4px; pointer-events: none; box-shadow: 0 0 10px rgba(255, 184, 0, 0.5); transition: width 0.25s linear; }
 
-.wi:fullscreen .w-timeline-wrap, .wi:-webkit-full-screen .w-timeline-wrap { display: none !important; }
-.wi:fullscreen .w-play-btn, .wi:-webkit-full-screen .w-play-btn,
-.wi:fullscreen .w-fs-btn, .wi:-webkit-full-screen .w-fs-btn { opacity: 0 !important; pointer-events: none !important; }
+.vi .wi:fullscreen, .vi .wi:-webkit-full-screen { --vid-w: min(100vw, 100vh * 9 / 16); }
+.hi .wi:fullscreen, .hi .wi:-webkit-full-screen { --vid-w: min(100vw, 100vh * 16 / 9); }
+.wi:fullscreen .w-timeline-wrap, .wi:-webkit-full-screen .w-timeline-wrap { width: calc(var(--vid-w) * 0.9); }
+.wi:fullscreen .w-fs-btn, .wi:-webkit-full-screen .w-fs-btn { right: auto; left: calc(50% + (var(--vid-w) / 2) - 46px); }
+.wi:fullscreen .w-play-btn, .wi:-webkit-full-screen .w-play-btn { pointer-events: auto !important; z-index: 10; }
+.wi:fullscreen .w-fs-btn, .wi:-webkit-full-screen .w-fs-btn { opacity: 1 !important; pointer-events: auto !important; z-index: 10; }
+.wi:fullscreen .w-play-btn.is-playing, .wi:-webkit-full-screen .w-play-btn.is-playing { opacity: 0; }
+.wi:fullscreen:hover .w-play-btn.is-playing, .wi:-webkit-full-screen:hover .w-play-btn.is-playing { opacity: 1; }
 
 /* Тень для кнопок, чтобы они не сливались с белым фоном */
 .w-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; z-index: 3; transition: all 0.2s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.15); padding: 0; pointer-events: none; outline: none; }
@@ -318,7 +322,7 @@ body.lang-en .ru-only { display: none; }
 .ctabtns { display: flex; gap: 11px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
 
 footer { position: relative; z-index: 10; }
-.f-container { display: flex; justify-content: center; align-items: center; max-width: 1000px; margin: 0 auto; padding: 50px 40px; text-align: center; }
+.f-container { display: flex; justify-content: center; align-items: center; max-width: 1000px; margin: 0 auto; padding: 60px 40px 80px; text-align: center; }
 .fcopy { color: rgba(255, 255, 255, .5); font-size: 11px; letter-spacing: .1em; font-weight: 500; }
 
 @media(max-width:900px) {
@@ -339,9 +343,9 @@ html { scroll-padding-top: 60px; }
 .htitle { gap: 8px; }
 .hsub { margin-top: 15px; margin-bottom: 30px; font-size: 14px; line-height: 1.6; }
 
-nav { max-width: calc(100vw - 32px); width: 100%; padding: 8px 16px 8px 20px; gap: 8px; height: 56px; border-radius: 100px; box-sizing: border-box; top: max(18px, env(safe-area-inset-top, 18px)); }
-nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 16px 6px 16px; box-sizing: border-box; }
-.ncta { padding: 0 14px; }
+nav { max-width: calc(100vw - 32px); width: 100%; padding: 8px 6px 8px 20px; gap: 8px; height: 56px; border-radius: 100px; box-sizing: border-box; top: env(safe-area-inset-top, 18px); }
+nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px; box-sizing: border-box; }
+.ncta { padding: 0 12px; }
 
 .hbtns, .ctabtns, .ab-btns { flex-direction: column; align-items: stretch; width: -webkit-max-content; width: -moz-max-content; width: max-content; max-width: 100%; margin-left: auto; margin-right: auto; gap: 12px; }
 .tick-track { gap: 20px; }
@@ -781,23 +785,6 @@ function seekVideo(event, wrap) {
     video.currentTime = percentage * video.duration;
 }
 
-function setNativeVideoControls(video, enabled) {
-    if (!video) return;
-    video.controls = enabled;
-    if (enabled) { video.setAttribute('controls', 'controls'); }
-    else { video.removeAttribute('controls'); }
-}
-
-function syncFullscreenVideoControls() {
-    const inFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
-    document.querySelectorAll('.w-video').forEach(v => {
-        const iosFs = !!(v.webkitDisplayingFullscreen || v.webkitPresentationMode === 'fullscreen');
-        setNativeVideoControls(v, inFs || iosFs);
-    });
-}
-document.addEventListener('fullscreenchange', syncFullscreenVideoControls);
-document.addEventListener('webkitfullscreenchange', syncFullscreenVideoControls);
-
 function togglePlayAction(container) {
     document.querySelectorAll('.voccard audio').forEach(a => {
         a.pause();
@@ -836,7 +823,6 @@ function toggleFullScreen(btn, event) {
     event.stopPropagation();
     const card = btn.closest('.wi');
     const video = card.querySelector('.w-video');
-    setNativeVideoControls(video, true);
     
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (isMobile && video) {
@@ -868,7 +854,7 @@ const timelineHTML = `<div class="w-timeline-wrap" onclick="seekVideo(event, thi
 return `
 <div class="${cls} wcard reveal" ontouchstart="">
 <div class="wi" onclick="togglePlayAction(this)" onmousemove="resetIdleTimer(this)" ontouchstart="resetIdleTimer(this)" onmouseleave="hideUIFast(this)">
-<video class="w-video" src="${w.v}#t=0.001" poster="${w.p}" playsinline preload="none" onended="onVideoEnded(this)" ontimeupdate="updateTimeline(this)" onwebkitbeginfullscreen="setNativeVideoControls(this, true)" onwebkitendfullscreen="setNativeVideoControls(this, false)"></video>
+<video class="w-video" src="${w.v}#t=0.001" poster="${w.p}" playsinline preload="none" onended="onVideoEnded(this)" ontimeupdate="updateTimeline(this)"></video>
 <button class="w-play-btn" aria-label="Смотреть/Пауза"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
 <button class="w-fs-btn" onclick="toggleFullScreen(this, event)" aria-label="На весь экран">
 <svg class="fs-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>

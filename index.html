@@ -49,6 +49,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@300&display=swap&subset=cyrillic,latin">
 </noscript>
 
+<!-- PLYR CSS -->
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
 <style>
 /*
 * Prefixed by https://autoprefixer.github.io
@@ -67,16 +70,16 @@
 }
 *:focus { outline: none !important; }
 
-/* Единый цвет выделения для Chrome и Safari */
 ::-moz-selection { background-color: #ffb800 !important; color: #000000 !important; text-shadow: none !important; }
 ::selection { background-color: #ffb800 !important; color: #000000 !important; text-shadow: none !important; }
 
-/* Плавный скролл с идеальным отступом под шапку для всех браузеров */
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
 :root {
 --y: #ffb800; --yg: rgba(255, 184, 0, 0.4); --sur: rgba(255, 255, 255, 0.04);
 --bor: rgba(255, 255, 255, 0.09); --tx: #e8e6de; --mu: rgba(232, 230, 222, 0.5);
+--plyr-color-main: var(--y);
+--plyr-video-background: transparent;
 }
 
 body { background: #030100; color: var(--tx); font-family: 'Inter', sans-serif; overflow-x: hidden; }
@@ -143,7 +146,6 @@ nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; background: rgb
 
 .gw-blur { 
     color: #fff; filter: blur(6px); -webkit-user-select: none; -moz-user-select: none; user-select: none; pointer-events: none; 
-    /* Упростил тени для устранения фризов в Safari */
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 200, 0, 0.9), 0 0 60px rgba(255, 160, 0, 0.8), 0 0 150px rgba(255, 110, 0, 0.5); 
     will-change: opacity; -webkit-animation: gp-opacity 4s ease-in-out infinite alternate; animation: gp-opacity 4s ease-in-out infinite alternate; transform: translateZ(0);
 }
@@ -169,11 +171,9 @@ nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; background: rgb
 .bsec { background: rgba(255, 255, 255, .05); color: var(--tx); border: 1px solid var(--bor); font-weight: 600; font-size: 13.5px; padding: 13px 26px; border-radius: 100px; text-decoration: none; letter-spacing: .05em; display: inline-flex; align-items: center; justify-content: center; gap: 9px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: transform .22s, background .22s; white-space: nowrap; }
 .bsec:hover { transform: scale(1.05); background: rgba(255, 255, 255, .09) }
 
-/* АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ */
 .reveal { opacity: 0; transition: opacity 0.5s ease; will-change: opacity; }
 .reveal.on { opacity: 1; }
 
-/* ПЛАВНАЯ БЕГУЩАЯ СТРОКА */
 .tick-wrap { overflow: hidden; border-top: 1px solid var(--bor); border-bottom: 1px solid var(--bor); position: relative; z-index: 10; background: rgba(0,0,0,0.1); }
 .tick-inner { width: 100%; padding: 30px 0; display: flex; flex-wrap: nowrap; mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); }
 .tick-track { display: flex; align-items: center; gap: 35px; padding-right: 35px; width: -webkit-max-content; width: -moz-max-content; width: max-content; flex-shrink: 0; -webkit-animation: tk 60s linear infinite; animation: tk 60s linear infinite; transform: translateZ(0); will-change: transform; }
@@ -196,53 +196,25 @@ section { position: relative; z-index: 10; }
 .vgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px }
 .hgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 50px }
 
-/* Вылет работает и при hover, и при тапе на мобилках (:active) */
-.wcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); cursor: pointer; transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.15s ease, opacity 0.5s ease; position: relative; transform: translateZ(0); }
+/* Плеер-карточки (интеграция PLYR) */
+.wcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.15s ease, opacity 0.5s ease; position: relative; transform: translateZ(0); }
 .wcard:hover, .wcard:active { transform: translate3d(0, -5px, 0); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border-color: rgba(255, 184, 0, 0.3); }
+
 .wi { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100%; transition: all 0.3s ease; }
 .vi .wi { aspect-ratio: 9/16; }
 .hi .wi { aspect-ratio: 16/9; }
-.w-video { width: 100%; height: 100%; -o-object-fit: cover; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0; background: #000; pointer-events: none; }
 
-.wi:fullscreen { width: 100vw; height: 100vh; background: #000; border-radius: 0; z-index: 9999; }
-.wi:-webkit-full-screen { width: 100vw; height: 100vh; background: #000; border-radius: 0; z-index: 9999; }
-.wi:fullscreen .w-video { -o-object-fit: contain; object-fit: contain; }
-.wi:-webkit-full-screen .w-video { object-fit: contain; }
-.wi.ui-hidden { cursor: none; }
-.wi.ui-hidden .w-play-btn, .wi.ui-hidden .w-fs-btn, .wi.ui-hidden .w-timeline-wrap { opacity: 0 !important; pointer-events: none !important; transition: opacity 0.2s ease; }
-.wi:fullscreen .fs-enter { display: none; }
-.wi:-webkit-full-screen .fs-enter { display: none; }
-.wi:fullscreen .fs-exit { display: block !important; }
-.wi:-webkit-full-screen .fs-exit { display: block !important; }
+/* Кастомизация Plyr под сайт */
+.wi .plyr { width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: #000; }
+.wi .plyr__video-wrapper { height: 100%; background: transparent; }
+.wi video, .wi .plyr__video-wrapper video { 
+    object-fit: contain !important; 
+}
 
-.w-timeline-wrap { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); width: 90%; height: 16px; display: flex; align-items: center; cursor: pointer; z-index: 4; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease, width 0.3s ease; }
-.wi.has-started .w-timeline-wrap { opacity: 1; pointer-events: auto; }
-.w-timeline-bg { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.25); border-radius: 4px; overflow: hidden; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); transition: height 0.2s ease; }
-.w-timeline-wrap:hover .w-timeline-bg { height: 6px; }
-.w-timeline-fill { height: 100%; width: 0%; background: var(--y); border-radius: 4px; pointer-events: none; box-shadow: 0 0 10px rgba(255, 184, 0, 0.5); transition: width 0.25s linear; }
-
-.vi .wi:fullscreen, .vi .wi:-webkit-full-screen { --vid-w: min(100vw, 100vh * 9 / 16); }
-.hi .wi:fullscreen, .hi .wi:-webkit-full-screen { --vid-w: min(100vw, 100vh * 16 / 9); }
-.wi:fullscreen .w-timeline-wrap, .wi:-webkit-full-screen .w-timeline-wrap { width: calc(var(--vid-w) * 0.9); }
-.wi:fullscreen .w-fs-btn, .wi:-webkit-full-screen .w-fs-btn { right: auto; left: calc(50% + (var(--vid-w) / 2) - 46px); }
-.wi:fullscreen .w-play-btn, .wi:-webkit-full-screen .w-play-btn { pointer-events: auto !important; z-index: 10; }
-.wi:fullscreen .w-fs-btn, .wi:-webkit-full-screen .w-fs-btn { opacity: 1 !important; pointer-events: auto !important; z-index: 10; }
-.wi:fullscreen .w-play-btn.is-playing, .wi:-webkit-full-screen .w-play-btn.is-playing { opacity: 0; }
-.wi:fullscreen:hover .w-play-btn.is-playing, .wi:-webkit-full-screen:hover .w-play-btn.is-playing { opacity: 1; }
-
-/* Тень для кнопок, чтобы они не сливались с белым фоном */
-.w-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; z-index: 3; transition: all 0.2s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.15); padding: 0; pointer-events: none; outline: none; }
-.wi:hover .w-play-btn { background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.4); transform: translate(-50%, -50%) scale(1.08); }
-.w-play-btn svg { width: 32px; height: 32px; fill: currentColor; stroke: currentColor; stroke-width: 1.5; margin-left: -2px; transition: transform 0.2s; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.6)); }
-.w-play-btn.is-playing svg { margin-left: 0; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.6)); }
-.w-play-btn.is-playing { opacity: 0; background: rgba(0, 0, 0, 0.4); border-color: transparent; }
-.wi:hover .w-play-btn.is-playing { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-
-.w-fs-btn { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; background: rgba(255, 255, 255, 0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; cursor: pointer; z-index: 10; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); transition: all 0.2s ease; opacity: 0; outline: none; pointer-events: auto; touch-action: manipulation; }
-.wi:hover .w-fs-btn, .wi:active .w-fs-btn { opacity: 1; }
-@media (hover: none) { .w-fs-btn { opacity: 1; pointer-events: auto; } }
-.w-fs-btn:hover { background: rgba(255, 255, 255, 0.25); transform: scale(1.05); border-color: rgba(255, 255, 255, 0.4); }
-.w-fs-btn svg { width: 18px; height: 18px; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.6)); }
+.vc-in .plyr { width: 100%; height: 100%; border-radius: 50%; }
+.vc-in .plyr__video-wrapper { height: 100%; border-radius: 50%; }
+.vc-in video { object-fit: cover; transform: scale(1.02); border-radius: 50%; }
+.vc-in .plyr__controls { display: none !important; } /* Прячем нижнюю панель у круглых видео */
 
 .rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px }
 .rcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); display: flex; flex-direction: column; cursor: pointer; transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.15s ease, opacity 0.5s ease; transform: translateZ(0); }
@@ -281,11 +253,10 @@ section { position: relative; z-index: 10; }
 .vid-slider-wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; max-width: 1000px; margin: 0 auto; padding: 20px 0; overflow-x: hidden; }
 .slider-btn { position: relative; background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; transition: color 0.3s, transform 0.2s; padding: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; outline: none; }
 .slider-btn:hover { color: var(--y); transform: scale(1.1); }
-/* Ширина трека сужена для придвижения стрелок */
+
 .vid-track { position: relative; flex: 1; max-width: 600px; height: 440px; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
 .vidcirc { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 16px; transition: transform 0.5s ease, opacity 0.5s ease; transform: translateZ(0); will-change: transform, opacity; }
 
-/* Круги смещены ближе к центру, чтобы заходить за основной */
 .vidcirc.prev { transform: translate3d(-160px, 0, 0) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; cursor: pointer; }
 .vidcirc.active { transform: translate3d(0, 0, 0) scale(1); opacity: 1; z-index: 3; pointer-events: auto; }
 .vidcirc.next { transform: translate3d(160px, 0, 0) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; cursor: pointer; }
@@ -294,10 +265,7 @@ section { position: relative; z-index: 10; }
 .vc-ring { width: 320px; height: 320px; border-radius: 50%; background: transparent; position: relative; transition: transform 0.3s; }
 .vc-in { width: 100%; height: 100%; border-radius: 50%; background: #1a1a1a; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); transition: border-color 0.3s; }
 .vidcirc.active:hover .vc-in { border-color: rgba(255, 255, 255, 0.3); }
-.vidcirc.active .vc-in { cursor: pointer; }
-.vc-in video { width: 100%; height: 100%; -o-object-fit: cover; object-fit: cover; transform: scale(1.02); pointer-events: none; border: none; outline: none; border-radius: 50%; }
-.vidcirc.active .vc-in:hover .w-play-btn { background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.4); transform: translate(-50%, -50%) scale(1.08); }
-.vidcirc.active .vc-in:hover .w-play-btn.is-playing { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
 .vc-name { font-size: 15px; font-weight: 600; color: var(--tx); letter-spacing: .05em; opacity: 0; transition: opacity .3s; margin-top: 2px; }
 .vidcirc.active .vc-name { opacity: 0.8; }
 .vidcirc.active:hover .vc-name { opacity: 1; }
@@ -312,7 +280,6 @@ section { position: relative; z-index: 10; }
 .vocplay svg { width: 24px; height: 24px; fill: currentColor; margin-left: -1px; }
 .vocwave-box { flex: 1; height: 24px; position: relative; cursor: pointer; display: flex; align-items: center; }
 
-/* Динамические волны ГС */
 .vbar-track { display: flex; align-items: center; justify-content: space-between; gap: 2px; width: 100%; height: 100%; position: absolute; left: 0; top: 0; }
 .vbar-bg .vbar { background: rgba(255,255,255,0.15); }
 .vbar-fill { -webkit-clip-path: inset(0 100% 0 0); clip-path: inset(0 100% 0 0); transition: -webkit-clip-path 0.1s linear; transition: clip-path 0.1s linear; transition: clip-path 0.1s linear, -webkit-clip-path 0.1s linear; pointer-events: none; z-index: 2; }
@@ -330,7 +297,6 @@ section { position: relative; z-index: 10; }
 
 body.lang-en .ru-only { display: none; }
 
-/* ПЛАВНЫЙ FAQ */
 .flist { margin-top: 50px; display: flex; flex-direction: column; gap: 10px }
 .fi { border: 1px solid var(--bor); border-radius: 13px; overflow: hidden; transition: border-color .28s, box-shadow .28s }
 .fi.open { border-color: rgba(255, 184, 0, 0.5); box-shadow: 0 0 40px rgba(255, 184, 0, 0.1); }
@@ -405,20 +371,24 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 .slider-btn svg { width: 28px; height: 28px; }
 .vid-track { width: 100%; height: 260px; }
 
-/* Круги на мобильной версии заходят друг за друга */
 .vidcirc.prev { transform: translate3d(-70px,0,0) scale(0.55); opacity: 0.25; z-index: 1; }
 .vidcirc.next { transform: translate3d(70px,0,0) scale(0.55); opacity: 0.25; z-index: 1; }
 
 .vc-ring { width: 190px; height: 190px; }
-.w-timeline-wrap { height: 20px; } 
-.w-timeline-bg { height: 5px; }
 .f-container { padding: 50px 24px; }
-
-.vi .w-play-btn { width: 48px; height: 48px; }
-.vi .w-play-btn svg { width: 24px; height: 24px; }
-.vi .w-fs-btn { width: 30px; height: 30px; top: 10px; right: 10px; }
-.vi .w-fs-btn svg { width: 15px; height: 15px; }
 }
+
+.plyr--video .plyr__control--overlaid {
+    padding: 20px; 
+}
+
+.plyr--video .plyr__control--overlaid svg {
+    width: 20px; /* Сама иконка больше */
+    height: 20px;
+}
+
+
+
 </style>
 </head>
 <body>
@@ -447,7 +417,6 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 
 <div id="hero-wrap">
 <section id="hero">
-<!-- Убран класс reveal, чтобы не было задержки при загрузке. CSS анимация keyframes отрабатывает сразу. -->
 <h1 class="htitle">
 <span class="hsup" data-ru="монтаж • контент • визуал" data-en="editing • content • visuals">монтаж • контент • визуал</span>
 <span class="hhand" data-ru="заставь свои видео" data-en="make your videos">заставь свои видео</span>
@@ -562,54 +531,48 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="vid-track" id="vidTrack">
 <div class="vidcirc" data-index="0">
   <div class="vc-ring">
-    <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/rev/rev1.mp4#t=0.001" loop playsinline preload="metadata"></video>
-      <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
+    <div class="vc-in">
+      <video class="plyr-circ" src="assets/rev/rev1.mp4" loop playsinline preload="metadata"></video>
     </div>
   </div>
   <div class="vc-name">Семён</div>
 </div>
 <div class="vidcirc" data-index="1">
   <div class="vc-ring">
-    <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/rev/rev2.mp4#t=0.001" loop playsinline preload="metadata"></video>
-      <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
+    <div class="vc-in">
+      <video class="plyr-circ" src="assets/rev/rev2.mp4" loop playsinline preload="metadata"></video>
     </div>
   </div>
   <div class="vc-name">Марк</div>
 </div>
 <div class="vidcirc" data-index="2">
   <div class="vc-ring">
-    <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/rev/rev3.mp4#t=0.001" loop playsinline preload="metadata"></video>
-      <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
+    <div class="vc-in">
+      <video class="plyr-circ" src="assets/rev/rev3.mp4" loop playsinline preload="metadata"></video>
     </div>
   </div>
   <div class="vc-name">Айша</div>
 </div>
 <div class="vidcirc" data-index="3">
   <div class="vc-ring">
-    <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/rev/rev4.mp4#t=0.001" loop playsinline preload="metadata"></video>
-      <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
+    <div class="vc-in">
+      <video class="plyr-circ" src="assets/rev/rev4.mp4" loop playsinline preload="metadata"></video>
     </div>
   </div>
   <div class="vc-name">Александр</div>
 </div>
 <div class="vidcirc" data-index="4">
   <div class="vc-ring">
-    <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/rev/rev5.mp4#t=0.001" loop playsinline preload="metadata"></video>
-      <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
+    <div class="vc-in">
+      <video class="plyr-circ" src="assets/rev/rev5.mp4" loop playsinline preload="metadata"></video>
     </div>
   </div>
   <div class="vc-name">Валерий</div>
 </div>
 <div class="vidcirc" data-index="5">
   <div class="vc-ring">
-    <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/rev/rev6.mp4#t=0.001" loop playsinline preload="metadata"></video>
-      <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
+    <div class="vc-in">
+      <video class="plyr-circ" src="assets/rev/rev6.mp4" loop playsinline preload="metadata"></video>
     </div>
   </div>
   <div class="vc-name">Евгений</div>
@@ -714,6 +677,9 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 </footer>
 </div>
 
+<!-- PLYR JS -->
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+
 <script>
 const LOGOS = [
 { src: 'assets/logos/africa.avif', alt: 'Африка', size: 90 },
@@ -759,6 +725,24 @@ const FAQ = [
 ];
 
 let lang = 'ru';
+let plyrInstances = [];
+let circPlyrInstances = [];
+
+function pauseAllMedia(exceptPlyr = null, exceptAudio = null) {
+    plyrInstances.forEach(p => {
+        if (p !== exceptPlyr && p.playing) p.pause();
+    });
+    circPlyrInstances.forEach(p => {
+        if (p !== exceptPlyr && p.playing) p.pause();
+    });
+    document.querySelectorAll('.voccard audio').forEach(audio => {
+        if (audio !== exceptAudio && !audio.paused) {
+            audio.pause();
+            const b = audio.parentElement.querySelector('.vocplay');
+            if (b) b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
+        }
+    });
+}
 
 function buildTicker() {
     let track = [...LOGOS, ...LOGOS, ...LOGOS];
@@ -772,133 +756,31 @@ function buildTicker() {
     inner.innerHTML = `<div class="tick-track">${html}</div><div class="tick-track">${html}</div>`;
 }
 
-function resetIdleTimer(container) {
-    container.classList.remove('ui-hidden');
-    clearTimeout(container.idleTimeout);
-    const video = container.querySelector('.w-video');
-    if (video && !video.paused) {
-        container.idleTimeout = setTimeout(() => { container.classList.add('ui-hidden'); }, 1000);
-    }
-}
-
-function hideUIFast(container) {
-    const video = container.querySelector('.w-video');
-    if (video && !video.paused) { container.classList.add('ui-hidden'); }
-}
-
-function onVideoEnded(video) {
-    video.currentTime = 0; 
-    video.pause();
-    const container = video.closest('.wi');
-    const btn = container.querySelector('.w-play-btn');
-    container.classList.remove('has-started'); 
-    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
-    btn.classList.remove('is-playing');
-    container.classList.remove('ui-hidden'); 
-}
-
-function updateTimeline(video) {
-    const fill = video.parentElement.querySelector('.w-timeline-fill');
-    if (fill && video.duration) {
-        const percentage = (video.currentTime / video.duration) * 100;
-        fill.style.width = percentage + '%';
-    }
-}
-
-function seekVideo(event, wrap) {
-    event.stopPropagation(); 
-    const video = wrap.parentElement.querySelector('.w-video');
-    if (!video.duration) return;
-    const rect = wrap.getBoundingClientRect();
-    const clickX = event.clientX - rect.left;
-    const percentage = Math.max(0, Math.min(1, clickX / rect.width));
-    video.currentTime = percentage * video.duration;
-}
-
-function togglePlayAction(container) {
-    document.querySelectorAll('.voccard audio').forEach(a => {
-        a.pause();
-        const b = a.parentElement.querySelector('.vocplay');
-        if(b) b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
-    });
-    document.querySelectorAll('.vidcirc video').forEach(v => {
-        v.pause();
-        const b = v.nextElementSibling;
-        if(b && b.classList.contains('w-play-btn')) {
-            b.classList.remove('is-playing');
-            b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
-        }
-    });
-
-    container.classList.add('has-started'); 
-    const video = container.querySelector('.w-video');
-    const btn = container.querySelector('.w-play-btn');
-    
-    if (video.paused) {
-        video.play();
-        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
-        btn.classList.add('is-playing');
-        resetIdleTimer(container);
-    } else {
-        video.pause();
-        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
-        btn.classList.remove('is-playing');
-        container.classList.remove('ui-hidden');
-        clearTimeout(container.idleTimeout);
-    }
-}
-
-function toggleFullScreen(btn, event) {
-    event.preventDefault();
-    event.stopPropagation();
-    const card = btn.closest('.wi');
-    const video = card.querySelector('.w-video');
-    
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if (isMobile && video) {
-        if (video.webkitEnterFullscreen) {
-            if (!video.paused || video.readyState >= 2) {
-                video.webkitEnterFullscreen();
-            } else {
-                video.play().then(() => { video.webkitEnterFullscreen(); }).catch(() => {});
-            }
-            return;
-        }
-        if (video.requestFullscreen) { video.requestFullscreen(); return; }
-    }
-    
-    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        if (card.requestFullscreen) { card.requestFullscreen(); } 
-        else if (card.webkitRequestFullscreen) { card.webkitRequestFullscreen(); } 
-        else if (card.msRequestFullscreen) { card.msRequestFullscreen(); }
-        else if (video && video.webkitEnterFullscreen) { video.webkitEnterFullscreen(); }
-    } else {
-        if (document.exitFullscreen) { document.exitFullscreen(); } 
-        else if (document.webkitExitFullscreen) { document.webkitExitFullscreen(); } 
-        else if (document.msExitFullscreen) { document.msExitFullscreen(); }
-    }
-}
-
 function wCard(w, cls) {
-const timelineHTML = `<div class="w-timeline-wrap" onclick="seekVideo(event, this)"><div class="w-timeline-bg"><div class="w-timeline-fill"></div></div></div>`;
-return `
-<div class="${cls} wcard reveal" ontouchstart="">
-<div class="wi" onclick="togglePlayAction(this)" onmousemove="resetIdleTimer(this)" ontouchstart="resetIdleTimer(this)" onmouseleave="hideUIFast(this)">
-<video class="w-video" src="${w.v}#t=0.001" poster="${w.p}" playsinline preload="none" onended="onVideoEnded(this)" ontimeupdate="updateTimeline(this)"></video>
-<button class="w-play-btn" aria-label="Смотреть/Пауза"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
-<button class="w-fs-btn" onclick="toggleFullScreen(this, event)" aria-label="На весь экран">
-<svg class="fs-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
-<svg class="fs-exit" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="14" y1="10" x2="21" y2="3"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
-</button>
-${timelineHTML}
-</div>
-</div>`;
+    return `
+    <div class="${cls} wcard reveal" ontouchstart="">
+        <div class="wi">
+            <video class="plyr-video" src="${w.v}" poster="${w.p}" playsinline preload="none"></video>
+        </div>
+    </div>`;
 }
 
 function buildWorks() {
-document.getElementById('vg').innerHTML = VW.map(w => wCard(w, 'vi')).join('');
-document.getElementById('hg').innerHTML = HW.map(w => wCard(w, 'hi')).join('');
-observeNewElements();
+    plyrInstances.forEach(p => p.destroy());
+    plyrInstances = [];
+    
+    document.getElementById('vg').innerHTML = VW.map(w => wCard(w, 'vi')).join('');
+    document.getElementById('hg').innerHTML = HW.map(w => wCard(w, 'hi')).join('');
+    
+    document.querySelectorAll('.plyr-video').forEach(v => {
+        const player = new Plyr(v, {
+            controls: ['play-large', 'progress', 'fullscreen']
+        });
+        plyrInstances.push(player);
+        player.on('play', (event) => pauseAllMedia(event.detail.plyr));
+    });
+    
+    observeNewElements();
 }
 
 function buildResults() {
@@ -953,39 +835,34 @@ function tf(i) {
 }
 
 function tl() {
-lang = lang === 'ru' ? 'en' : 'ru';
-document.getElementById('lb').textContent = lang === 'ru' ? 'EN' : 'RU';
-if(lang === 'en') { document.body.classList.add('lang-en'); } else { document.body.classList.remove('lang-en'); }
-document.querySelectorAll('[data-ru]').forEach(el => {
-    const t = lang === 'ru' ? el.dataset.ru : el.dataset.en;
-    if (t) el.innerHTML = t;
-});
-buildWorks(); buildResults(); buildFAQ();
+    lang = lang === 'ru' ? 'en' : 'ru';
+    document.getElementById('lb').textContent = lang === 'ru' ? 'EN' : 'RU';
+    if(lang === 'en') { document.body.classList.add('lang-en'); } else { document.body.classList.remove('lang-en'); }
+    document.querySelectorAll('[data-ru]').forEach(el => {
+        const t = lang === 'ru' ? el.dataset.ru : el.dataset.en;
+        if (t) el.innerHTML = t;
+    });
+    buildWorks(); buildResults(); buildFAQ();
 }
 
 const circles = Array.from(document.querySelectorAll('.vidcirc'));
 let activeIndex = 0;
 
 function updateSlider() {
-circles.forEach((c, index) => { 
-    c.className = 'vidcirc hidden'; 
-    const v = c.querySelector('video');
-    const b = c.querySelector('.w-play-btn');
-    if (v && !v.paused) {
-        v.pause();
-        v.currentTime = 0; 
-        if(b) {
-            b.classList.remove('is-playing');
-            b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
-        }
-    }
-});
-const total = circles.length;
-const prevIndex = (activeIndex - 1 + total) % total;
-const nextIndex = (activeIndex + 1) % total;
-circles[activeIndex].classList.add('active'); circles[activeIndex].classList.remove('hidden');
-circles[prevIndex].classList.add('prev'); circles[prevIndex].classList.remove('hidden');
-circles[nextIndex].classList.add('next'); circles[nextIndex].classList.remove('hidden');
+    circles.forEach((c) => { 
+        c.className = 'vidcirc hidden'; 
+    });
+    
+    circPlyrInstances.forEach(p => {
+        if (p.playing) p.pause();
+    });
+    
+    const total = circles.length;
+    const prevIndex = (activeIndex - 1 + total) % total;
+    const nextIndex = (activeIndex + 1) % total;
+    circles[activeIndex].classList.add('active'); circles[activeIndex].classList.remove('hidden');
+    circles[prevIndex].classList.add('prev'); circles[prevIndex].classList.remove('hidden');
+    circles[nextIndex].classList.add('next'); circles[nextIndex].classList.remove('hidden');
 }
 
 document.getElementById('prevBtn').addEventListener('click', () => { activeIndex = (activeIndex - 1 + circles.length) % circles.length; updateSlider(); });
@@ -1000,38 +877,6 @@ circles.forEach((c, index) => {
     }); 
 });
 updateSlider();
-
-function toggleCircleVideo(container) {
-    const circle = container.closest('.vidcirc');
-    if (!circle.classList.contains('active')) return;
-    const video = container.querySelector('video');
-    const btn = container.querySelector('.w-play-btn');
-    if (video.paused) {
-        document.querySelectorAll('video, audio').forEach(media => {
-            if(media !== video) {
-                media.pause();
-                if(media.parentElement && media.parentElement.classList.contains('vc-in')){
-                     media.currentTime = 0;
-                     const b = media.nextElementSibling;
-                     if(b) { b.classList.remove('is-playing'); b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>'; }
-                }
-                if(media.tagName.toLowerCase() === 'audio') {
-                    const b = media.parentElement.querySelector('.vocplay');
-                    if(b) b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
-                }
-                const b = media.parentElement.querySelector('.w-play-btn');
-                if(b && !media.parentElement.classList.contains('vc-in')) { b.classList.remove('is-playing'); b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>'; }
-            }
-        });
-        video.play();
-        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
-        btn.classList.add('is-playing');
-    } else {
-        video.pause();
-        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
-        btn.classList.remove('is-playing');
-    }
-}
 
 function formatTime(seconds) {
     if (isNaN(seconds) || seconds === Infinity) return "0:00";
@@ -1069,19 +914,9 @@ function toggleVoice(card, event) {
     if(event.target.closest('.vocwave-box')) return; 
     const audio = card.querySelector('audio');
     const btn = card.querySelector('.vocplay');
+    
     if (audio.paused) {
-        document.querySelectorAll('video, audio').forEach(media => {
-            if (media !== audio) {
-                media.pause();
-                if(media.tagName.toLowerCase() === 'audio') {
-                    const b = media.parentElement.querySelector('.vocplay');
-                    if(b) b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
-                } else {
-                     const b = media.parentElement.querySelector('.w-play-btn');
-                     if(b) { b.classList.remove('is-playing'); b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>'; }
-                }
-            }
-        });
+        pauseAllMedia(null, audio);
         audio.play();
         btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
     } else {
@@ -1167,6 +1002,15 @@ document.addEventListener('DOMContentLoaded', () => {
     buildWorks(); 
     buildResults(); 
     buildFAQ();
+    
+    document.querySelectorAll('.plyr-circ').forEach(v => {
+        const player = new Plyr(v, {
+            controls: ['play-large'],
+            clickToPlay: true
+        });
+        circPlyrInstances.push(player);
+        player.on('play', (event) => pauseAllMedia(event.detail.plyr));
+    });
     
     document.querySelectorAll('.vocwave-box').forEach((box, i) => {
         let bars = '';

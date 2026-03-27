@@ -516,8 +516,8 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 .vidcirc.next { transform: translate3d(70px,0,0) scale(0.55); opacity: 0.25; z-index: 1; }
 
 .vc-ring { width: 240px; height: 240px; }
-.vc-in .plyr__control--overlaid { padding: 12px !important; }
-.vc-in .plyr__control--overlaid svg { width: 18px !important; height: 18px !important; }
+.vc-in .plyr__control--overlaid { padding: 10px !important; }
+.vc-in .plyr__control--overlaid svg { width: 16px !important; height: 16px !important; }
 
 .f-container { padding: 50px 24px; }
 }
@@ -530,44 +530,49 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
     .wi .plyr__controls .plyr__control svg { width: 13px; height: 13px; }
 }
 
-/* Кнопка Play — всегда видна, темный фон и блюр */
+/* Кнопка Play — тёмный фон и постоянный блюр */
+/* Кнопка Play — единый стиль (тёмный фон, постоянный блюр) для ВСЕХ видео (основных и отзывов) */
 .plyr--video .plyr__control--overlaid {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     padding: 22px !important;
-    background-color: rgba(0, 0, 0, 0.4) !important;
-    background-image: none !important;
+    background: rgba(0, 0, 0, 0.4) !important;
     -webkit-backdrop-filter: blur(10px) !important;
     backdrop-filter: blur(10px) !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35) !important;
-    transform: translate(-50%, -50%) !important;
-    transition: background-color 0.2s, transform 0.2s !important;
+    /* translateZ(0) форсирует отрисовку блюра всегда, а не только по hover */
+    transform: translate(-50%, -50%) translateZ(0) !important;
+    transition: background 0.2s ease, transform 0.2s ease, opacity 0.2s ease !important;
     top: 50% !important;
     left: 50% !important;
     margin: 0 !important;
     z-index: 5 !important;
+    opacity: 1 !important; /* Всегда видна до старта / на паузе */
+    visibility: visible !important;
+}
+.plyr--video.plyr--playing .plyr__control--overlaid {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 .plyr--video .plyr__control--overlaid:hover,
 .plyr--video .plyr__control--overlaid:focus {
-    background-color: rgba(0, 0, 0, 0.6) !important;
-    transform: translate(-50%, -50%) !important;
-    opacity: 1 !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    transform: translate(-50%, -50%) scale(1.05) translateZ(0) !important;
 }
 .plyr--video .plyr__control--overlaid svg {
-    width: 24px;
-    height: 24px;
+    width: 24px !important;
+    height: 24px !important;
     fill: #fff !important;
     color: #fff !important;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) !important;
+    margin: 0 !important;
+    margin-left: 2px !important; /* Оптическая центровка треугольника Play */
 }
 
-/* Кружки-видеоотзывы: убрать всё кроме play/pause, фиксация круга */
-.vc-in .plyr__control--overlaid {
-    padding: 22px !important;
-}
-.vc-in .plyr__control--overlaid svg {
-    width: 22px !important;
-    height: 22px !important;
-}
+/* 2) Кружки-видеоотзывы: форма */
 .vc-in .plyr { border-radius: 50% !important; overflow: hidden !important; }
 .vc-in .plyr__video-wrapper { border-radius: 50% !important; overflow: hidden !important; }
 .vc-in .plyr--playing .plyr__control--overlaid { opacity: 0; pointer-events: none; }
@@ -586,13 +591,13 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 .wi.is-fullscreen-ui .plyr__controls { display: flex !important; opacity: 1 !important; pointer-events: auto !important; }
 .wi.is-fullscreen-ui .custom-fs-btn { display: flex !important; opacity: 1 !important; pointer-events: auto !important; }
 
-/* Белый кружок на слайдере — убрать */
+/* 6) Белый кружок на слайдере — убрать */
 .plyr--full-ui input[type=range]::-webkit-slider-thumb { -webkit-appearance: none !important; appearance: none !important; width: 0 !important; height: 0 !important; opacity: 0 !important; background: transparent !important; border: 0 !important; }
 .plyr--full-ui input[type=range]::-moz-range-thumb { width: 0 !important; height: 0 !important; opacity: 0 !important; background: transparent !important; border: 0 !important; }
 .plyr__progress__buffer { height: 3px !important; }
 .plyr--full-ui input[type=range] { height: 3px !important; }
 
-/* Кнопка fullscreen — правый верхний угол с фоном */
+/* 8) Кнопка fullscreen — правый верхний угол с фоном */
 .wi .plyr__controls [data-plyr="fullscreen"] {
     display: none !important;
 }
@@ -604,7 +609,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.4);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -614,10 +619,10 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
     cursor: pointer;
     color: #fff;
     padding: 0;
-    transition: background-color 0.2s, transform 0.2s;
+    transition: background 0.2s, transform 0.2s;
     outline: none;
 }
-.custom-fs-btn:hover { background-color: rgba(0, 0, 0, 0.6); transform: scale(1.08); }
+.custom-fs-btn:hover { background: rgba(0, 0, 0, 0.6); transform: scale(1.08); }
 .custom-fs-btn svg { width: 16px; height: 16px; }
 
 /* Стрелки в отзывах всегда видны */

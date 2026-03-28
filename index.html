@@ -88,7 +88,10 @@ body { background: #030100; color: var(--tx); font-family: 'Inter', sans-serif; 
 
 /* ФОН (Бесшовный, плавный цикл анимации градиентов без дерганий) */
 #bg { position: fixed; inset: 0; z-index: 0; background: #020100; overflow: hidden; }
-.bg-sphere { position: absolute; border-radius: 50%; pointer-events: none; will-change: transform, opacity; }
+
+/* Вернули блюр, но урезали его радиус до 60px для оптимизации + will-change */
+.bg-sphere { position: absolute; border-radius: 50%; filter: blur(60px); pointer-events: none; will-change: transform, opacity; }
+
 .sphere-1 { width: 80vw; height: 80vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.25) 0%, rgba(255, 160, 0, 0) 70%); top: -25vw; left: -25vw; -webkit-animation: pulse1 16s infinite ease-in-out; animation: pulse1 16s infinite ease-in-out; transform: translateZ(0); }
 .sphere-2 { width: 75vw; height: 75vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.22) 0%, rgba(255, 160, 0, 0) 70%); bottom: -25vw; right: -25vw; -webkit-animation: pulse2 18s infinite ease-in-out; animation: pulse2 18s infinite ease-in-out; transform: translateZ(0); }
 @media (prefers-reduced-motion: reduce) { .bg-sphere { animation: none !important; } }
@@ -146,7 +149,8 @@ nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; background: rgb
 
 .gw-blur { 
     color: #fff; filter: blur(6px); -webkit-user-select: none; -moz-user-select: none; user-select: none; pointer-events: none; 
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 200, 0, 0.9), 0 0 60px rgba(255, 160, 0, 0.8), 0 0 150px rgba(255, 110, 0, 0.5); 
+    /* Оставили только 1-ю (10px) и 3-ю (60px) тени */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 60px rgba(255, 160, 0, 0.8); 
     will-change: opacity; -webkit-animation: gp-opacity 4s ease-in-out infinite alternate; animation: gp-opacity 4s ease-in-out infinite alternate; transform: translateZ(0);
 }
 @-webkit-keyframes gp-opacity { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
